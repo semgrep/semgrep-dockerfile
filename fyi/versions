@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: e10833bfee4a4f348a48c3f735bb3a2b04f6da0f
+Latest commit in repo: f0b8e6748238ac0a6ba10e360db5b712039db895
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,7 +10,7 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: e10833bfee4a4f348a48c3f735bb3a2b04f6da0f
+Latest commit in repo: f0b8e6748238ac0a6ba10e360db5b712039db895
 Last change in file:
   commit d4f9099f9a45a55dc7e8a2bbfdc251201431f23a
   Author: Camden Cheek <camden@ccheek.com>
@@ -20,11 +20,11 @@ Last change in file:
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 2f446e290613777783653ebbaa75e9ba02ba9ecb
+Latest commit in repo: 06eaf8372b7d132ce7452de3d96cd811795c2b7c
 Last change in file:
-  commit 57676157180b7b1c061d8114a139a86e997c0c2d
+  commit ae94a05590ff4ce33441eccb49422e70580c6b91
   Author: Martin Jambon <martin@r2c.dev>
-  Date:   Tue Jul 6 20:43:43 2021 -0700
+  Date:   Sat Nov 13 01:31:12 2021 -0800
   
-      Add dockerfile support + semgrep extensions for shell commands
+      Simplify semgrep extensions for dockerfile
 ---

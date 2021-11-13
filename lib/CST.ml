@@ -15,9 +15,6 @@ type pat_4a2f38a =
   Token.t (* pattern [cC][rR][oO][sS][sS]_[bB][uU][iI][lL][dD][a-zA-Z_]* *)
 [@@deriving sexp_of]
 
-type variable = Token.t (* pattern [a-zA-Z][a-zA-Z0-9_]* *)
-[@@deriving sexp_of]
-
 type pat_030af88 = Token.t (* pattern [eE][nN][vV] *)
 [@@deriving sexp_of]
 
@@ -53,6 +50,9 @@ type comment = Token.t (* pattern #.* *)
 type escape_sequence = Token.t
 [@@deriving sexp_of]
 
+type variable = Token.t (* pattern [a-zA-Z][a-zA-Z0-9_]* *)
+[@@deriving sexp_of]
+
 type imm_tok_pat_3d340f6 = Token.t (* pattern \s+ *)
 [@@deriving sexp_of]
 
@@ -85,9 +85,6 @@ type pat_239fcac = Token.t (* pattern [cC][mM][dD] *)
 
 type pat_56bd329 =
   Token.t (* pattern [sS][tT][oO][pP][sS][iI][gG][nN][aA][lL] *)
-[@@deriving sexp_of]
-
-type semgrep_metavariable_name = Token.t (* pattern [A-Z_][A-Z_0-9]* *)
 [@@deriving sexp_of]
 
 type imm_tok_pat_589b0f8 = Token.t (* pattern "[^\"\\n\\\\\\$]+" *)
@@ -168,13 +165,13 @@ type param = (
 )
 [@@deriving sexp_of]
 
-type semgrep_double_curly_metavariable = (
-    Token.t (* "${{" *) * semgrep_metavariable_name (*tok*)
-  * Token.t (* "}}" *)
-)
+type anon_comment = (Token.t (* "#" *) * pat_4fd4a56 (*tok*))
 [@@deriving sexp_of]
 
-type anon_comment = (Token.t (* "#" *) * pat_4fd4a56 (*tok*))
+type maintainer_instruction = (pat_5cf3c2c (*tok*) * pat_4fd4a56 (*tok*))
+[@@deriving sexp_of]
+
+type cross_build_instruction = (pat_4a2f38a (*tok*) * pat_4fd4a56 (*tok*))
 [@@deriving sexp_of]
 
 type expose_port = (
@@ -187,6 +184,14 @@ type expose_port = (
 )
 [@@deriving sexp_of]
 
+type shell_fragment =
+  [
+      `Pat_4b81dfc of pat_4b81dfc (*tok*)
+    | `Pat_f05eb95 of pat_f05eb95 (*tok*)
+  ]
+    list (* one or more *)
+[@@deriving sexp_of]
+
 type image_tag = (
     Token.t (* ":" *)
   * [
@@ -197,17 +202,8 @@ type image_tag = (
 )
 [@@deriving sexp_of]
 
-type user_name_or_group =
-  [ `Pat_660c06c of pat_660c06c (*tok*) | `Expa of expansion ]
-    list (* one or more *)
-[@@deriving sexp_of]
-
-type unquoted_string =
-  [
-      `Imm_tok_pat_24a1611 of imm_tok_pat_24a1611 (*tok*)
-    | `BSLASHSPACE of Token.t (* "\\ " *)
-    | `Expa of expansion
-  ]
+type stopsignal_value =
+  [ `Pat_441cd81 of pat_441cd81 (*tok*) | `Expa of expansion ]
     list (* one or more *)
 [@@deriving sexp_of]
 
@@ -238,11 +234,6 @@ type image_alias =
     list (* one or more *)
 [@@deriving sexp_of]
 
-type stopsignal_value =
-  [ `Pat_441cd81 of pat_441cd81 (*tok*) | `Expa of expansion ]
-    list (* one or more *)
-[@@deriving sexp_of]
-
 type double_quoted_string = (
     Token.t (* "\"" *)
   * [
@@ -255,12 +246,16 @@ type double_quoted_string = (
 )
 [@@deriving sexp_of]
 
-type shell_fragment =
+type user_name_or_group =
+  [ `Pat_660c06c of pat_660c06c (*tok*) | `Expa of expansion ]
+    list (* one or more *)
+[@@deriving sexp_of]
+
+type unquoted_string =
   [
-      `Semg_ellips of Token.t (* "..." *)
-    | `Semg_double_curl_meta of semgrep_double_curly_metavariable
-    | `Pat_4b81dfc of pat_4b81dfc (*tok*)
-    | `Pat_f05eb95 of pat_f05eb95 (*tok*)
+      `Imm_tok_pat_24a1611 of imm_tok_pat_24a1611 (*tok*)
+    | `BSLASHSPACE of Token.t (* "\\ " *)
+    | `Expa of expansion
   ]
     list (* one or more *)
 [@@deriving sexp_of]
@@ -268,13 +263,38 @@ type shell_fragment =
 type comment_line = (anon_comment * Token.t (* "\n" *))
 [@@deriving sexp_of]
 
-type image_spec = (image_name * image_tag option * image_digest option)
+type expose_instruction = (
+    pat_9818882 (*tok*)
+  * [ `Expose_port of expose_port | `Expa of expansion ]
+      list (* one or more *)
+)
 [@@deriving sexp_of]
 
-type anon_choice_double_quoted_str_6b200ac = [
-    `Double_quoted_str of double_quoted_string
-  | `Unqu_str of unquoted_string
-]
+type stopsignal_instruction = (pat_56bd329 (*tok*) * stopsignal_value)
+[@@deriving sexp_of]
+
+type copy_instruction = (
+    pat_9c0a769 (*tok*)
+  * param option
+  * path
+  * non_newline_whitespace (*tok*)
+  * path
+)
+[@@deriving sexp_of]
+
+type workdir_instruction = (pat_a6040bb (*tok*) * path)
+[@@deriving sexp_of]
+
+type add_instruction = (
+    pat_ed84199 (*tok*)
+  * param option
+  * path
+  * non_newline_whitespace (*tok*)
+  * path
+)
+[@@deriving sexp_of]
+
+type image_spec = (image_name * image_tag option * image_digest option)
 [@@deriving sexp_of]
 
 type string_array = (
@@ -285,6 +305,49 @@ type string_array = (
     )
       option
   * Token.t (* "]" *)
+)
+[@@deriving sexp_of]
+
+type user_instruction = (
+    pat_a368b76 (*tok*)
+  * user_name_or_group
+  * (Token.t (* ":" *) * user_name_or_group) option
+)
+[@@deriving sexp_of]
+
+type anon_choice_double_quoted_str_6b200ac = [
+    `Double_quoted_str of double_quoted_string
+  | `Unqu_str of unquoted_string
+]
+[@@deriving sexp_of]
+
+type from_instruction = (
+    pat_5eaae97 (*tok*)
+  * param option
+  * image_spec
+  * (pat_79b8891 (*tok*) * image_alias) option
+)
+[@@deriving sexp_of]
+
+type shell_instruction = (pat_9374c10 (*tok*) * string_array)
+[@@deriving sexp_of]
+
+type volume_instruction = (
+    pat_1c663f5 (*tok*)
+  * [
+        `Str_array of string_array
+      | `Path_rep_non_nl_whit_path of (
+            path
+          * (non_newline_whitespace (*tok*) * path) list (* zero or more *)
+        )
+    ]
+)
+[@@deriving sexp_of]
+
+type arg_instruction = (
+    pat_985c208 (*tok*)
+  * pat_4de4cb9 (*tok*)
+  * (Token.t (* "=" *) * anon_choice_double_quoted_str_6b200ac) option
 )
 [@@deriving sexp_of]
 
@@ -320,192 +383,7 @@ type anon_choice_str_array_878ad0b = [
 ]
 [@@deriving sexp_of]
 
-type cmd_instruction = (pat_239fcac (*tok*) * anon_choice_str_array_878ad0b)
-[@@deriving sexp_of]
-
-type instruction = [
-    `From_inst of (
-        pat_5eaae97 (*tok*)
-      * param option
-      * image_spec
-      * (pat_79b8891 (*tok*) * image_alias) option
-    )
-  | `Run_inst of (pat_f2a2f8f (*tok*) * anon_choice_str_array_878ad0b)
-  | `Cmd_inst of cmd_instruction
-  | `Label_inst of (pat_433746d (*tok*) * label_pair list (* one or more *))
-  | `Expose_inst of (
-        pat_9818882 (*tok*)
-      * [ `Expose_port of expose_port | `Expa of expansion ]
-          list (* one or more *)
-    )
-  | `Env_inst of (
-        pat_030af88 (*tok*)
-      * [
-            `Rep1_env_pair of env_pair list (* one or more *)
-          | `Spaced_env_pair of spaced_env_pair
-        ]
-    )
-  | `Add_inst of (
-        pat_ed84199 (*tok*)
-      * param option
-      * path
-      * non_newline_whitespace (*tok*)
-      * path
-    )
-  | `Copy_inst of (
-        pat_9c0a769 (*tok*)
-      * param option
-      * path
-      * non_newline_whitespace (*tok*)
-      * path
-    )
-  | `Entr_inst of (pat_808c5a1 (*tok*) * anon_choice_str_array_878ad0b)
-  | `Volume_inst of (
-        pat_1c663f5 (*tok*)
-      * [
-            `Str_array of string_array
-          | `Path_rep_non_nl_whit_path of (
-                path
-              * (non_newline_whitespace (*tok*) * path)
-                  list (* zero or more *)
-            )
-        ]
-    )
-  | `User_inst of (
-        pat_a368b76 (*tok*)
-      * user_name_or_group
-      * (Token.t (* ":" *) * user_name_or_group) option
-    )
-  | `Work_inst of (pat_a6040bb (*tok*) * path)
-  | `Arg_inst of (
-        pat_985c208 (*tok*)
-      * pat_4de4cb9 (*tok*)
-      * (Token.t (* "=" *) * anon_choice_double_quoted_str_6b200ac) option
-    )
-  | `Onbu_inst of (pat_aa82a08 (*tok*) * instruction)
-  | `Stop_inst of (pat_56bd329 (*tok*) * stopsignal_value)
-  | `Heal_inst of (
-        pat_fd0037e (*tok*)
-      * [
-            `NONE of Token.t (* "NONE" *)
-          | `Rep_param_cmd_inst of (
-                param list (* zero or more *)
-              * cmd_instruction
-            )
-        ]
-    )
-  | `Shell_inst of (pat_9374c10 (*tok*) * string_array)
-  | `Main_inst of (pat_5cf3c2c (*tok*) * pat_4fd4a56 (*tok*))
-  | `Cross_build_inst of (pat_4a2f38a (*tok*) * pat_4fd4a56 (*tok*))
-]
-[@@deriving sexp_of]
-
-type source_file =
-  ([ `Inst of instruction | `Comm of comment (*tok*) ] * Token.t (* "\n" *))
-    list (* zero or more *)
-[@@deriving sexp_of]
-
-type semgrep_ellipsis (* inlined *) = Token.t (* "..." *)
-[@@deriving sexp_of]
-
-type line_continuation (* inlined *) = Token.t (* "\\\n" *)
-[@@deriving sexp_of]
-
-type env_key (* inlined *) = pat_845d48b (*tok*)
-[@@deriving sexp_of]
-
-type maintainer_instruction (* inlined *) = (
-    pat_5cf3c2c (*tok*) * pat_4fd4a56 (*tok*)
-)
-[@@deriving sexp_of]
-
-type cross_build_instruction (* inlined *) = (
-    pat_4a2f38a (*tok*) * pat_4fd4a56 (*tok*)
-)
-[@@deriving sexp_of]
-
-type expose_instruction (* inlined *) = (
-    pat_9818882 (*tok*)
-  * [ `Expose_port of expose_port | `Expa of expansion ]
-      list (* one or more *)
-)
-[@@deriving sexp_of]
-
-type user_instruction (* inlined *) = (
-    pat_a368b76 (*tok*)
-  * user_name_or_group
-  * (Token.t (* ":" *) * user_name_or_group) option
-)
-[@@deriving sexp_of]
-
-type copy_instruction (* inlined *) = (
-    pat_9c0a769 (*tok*)
-  * param option
-  * path
-  * non_newline_whitespace (*tok*)
-  * path
-)
-[@@deriving sexp_of]
-
-type workdir_instruction (* inlined *) = (pat_a6040bb (*tok*) * path)
-[@@deriving sexp_of]
-
-type add_instruction (* inlined *) = (
-    pat_ed84199 (*tok*)
-  * param option
-  * path
-  * non_newline_whitespace (*tok*)
-  * path
-)
-[@@deriving sexp_of]
-
-type stopsignal_instruction (* inlined *) = (
-    pat_56bd329 (*tok*) * stopsignal_value
-)
-[@@deriving sexp_of]
-
-type shell_command (* inlined *) = (
-    shell_fragment
-  * (
-        Token.t (* "\\\n" *)
-      * comment_line list (* zero or more *)
-      * shell_fragment
-    )
-      list (* zero or more *)
-)
-[@@deriving sexp_of]
-
-type from_instruction (* inlined *) = (
-    pat_5eaae97 (*tok*)
-  * param option
-  * image_spec
-  * (pat_79b8891 (*tok*) * image_alias) option
-)
-[@@deriving sexp_of]
-
-type arg_instruction (* inlined *) = (
-    pat_985c208 (*tok*)
-  * pat_4de4cb9 (*tok*)
-  * (Token.t (* "=" *) * anon_choice_double_quoted_str_6b200ac) option
-)
-[@@deriving sexp_of]
-
-type shell_instruction (* inlined *) = (pat_9374c10 (*tok*) * string_array)
-[@@deriving sexp_of]
-
-type volume_instruction (* inlined *) = (
-    pat_1c663f5 (*tok*)
-  * [
-        `Str_array of string_array
-      | `Path_rep_non_nl_whit_path of (
-            path
-          * (non_newline_whitespace (*tok*) * path) list (* zero or more *)
-        )
-    ]
-)
-[@@deriving sexp_of]
-
-type env_instruction (* inlined *) = (
+type env_instruction = (
     pat_030af88 (*tok*)
   * [
         `Rep1_env_pair of env_pair list (* one or more *)
@@ -514,23 +392,24 @@ type env_instruction (* inlined *) = (
 )
 [@@deriving sexp_of]
 
-type label_instruction (* inlined *) = (
+type label_instruction = (
     pat_433746d (*tok*)
   * label_pair list (* one or more *)
 )
 [@@deriving sexp_of]
 
-type run_instruction (* inlined *) = (
-    pat_f2a2f8f (*tok*) * anon_choice_str_array_878ad0b
-)
+type run_instruction = (pat_f2a2f8f (*tok*) * anon_choice_str_array_878ad0b)
 [@@deriving sexp_of]
 
-type entrypoint_instruction (* inlined *) = (
+type cmd_instruction = (pat_239fcac (*tok*) * anon_choice_str_array_878ad0b)
+[@@deriving sexp_of]
+
+type entrypoint_instruction = (
     pat_808c5a1 (*tok*) * anon_choice_str_array_878ad0b
 )
 [@@deriving sexp_of]
 
-type healthcheck_instruction (* inlined *) = (
+type healthcheck_instruction = (
     pat_fd0037e (*tok*)
   * [
         `NONE of Token.t (* "NONE" *)
@@ -542,7 +421,61 @@ type healthcheck_instruction (* inlined *) = (
 )
 [@@deriving sexp_of]
 
-type onbuild_instruction (* inlined *) = (pat_aa82a08 (*tok*) * instruction)
+type instruction = [
+    `Semg_ellips of Token.t (* "..." *)
+  | `Choice_from_inst of [
+        `From_inst of from_instruction
+      | `Run_inst of run_instruction
+      | `Cmd_inst of cmd_instruction
+      | `Label_inst of label_instruction
+      | `Expose_inst of expose_instruction
+      | `Env_inst of env_instruction
+      | `Add_inst of add_instruction
+      | `Copy_inst of copy_instruction
+      | `Entr_inst of entrypoint_instruction
+      | `Volume_inst of volume_instruction
+      | `User_inst of user_instruction
+      | `Work_inst of workdir_instruction
+      | `Arg_inst of arg_instruction
+      | `Onbu_inst of onbuild_instruction
+      | `Stop_inst of stopsignal_instruction
+      | `Heal_inst of healthcheck_instruction
+      | `Shell_inst of shell_instruction
+      | `Main_inst of maintainer_instruction
+      | `Cross_build_inst of cross_build_instruction
+    ]
+]
+
+and onbuild_instruction = (pat_aa82a08 (*tok*) * instruction)
+[@@deriving sexp_of]
+
+type source_file =
+  ([ `Inst of instruction | `Comm of comment (*tok*) ] * Token.t (* "\n" *))
+    list (* zero or more *)
+[@@deriving sexp_of]
+
+type semgrep_metavariable (* inlined *) =
+  Token.t (* pattern \$[A-Z_][A-Z_0-9]* *)
+[@@deriving sexp_of]
+
+type line_continuation (* inlined *) = Token.t (* "\\\n" *)
+[@@deriving sexp_of]
+
+type semgrep_ellipsis (* inlined *) = Token.t (* "..." *)
+[@@deriving sexp_of]
+
+type env_key (* inlined *) = pat_845d48b (*tok*)
+[@@deriving sexp_of]
+
+type shell_command (* inlined *) = (
+    shell_fragment
+  * (
+        Token.t (* "\\\n" *)
+      * comment_line list (* zero or more *)
+      * shell_fragment
+    )
+      list (* zero or more *)
+)
 [@@deriving sexp_of]
 
 let dump_tree root =
