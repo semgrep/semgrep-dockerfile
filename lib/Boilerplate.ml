@@ -26,6 +26,9 @@ let map_imm_tok_pat_f6e1de8 (env : env) (tok : CST.imm_tok_pat_f6e1de8) =
 let map_pat_4a2f38a (env : env) (tok : CST.pat_4a2f38a) =
   (* pattern [cC][rR][oO][sS][sS]_[bB][uU][iI][lL][dD][a-zA-Z_]* *) token env tok
 
+let map_variable (env : env) (tok : CST.variable) =
+  (* pattern [a-zA-Z][a-zA-Z0-9_]* *) token env tok
+
 let map_pat_030af88 (env : env) (tok : CST.pat_030af88) =
   (* pattern [eE][nN][vV] *) token env tok
 
@@ -58,9 +61,6 @@ let map_comment (env : env) (tok : CST.comment) =
 
 let map_escape_sequence (env : env) (tok : CST.escape_sequence) =
   (* escape_sequence *) token env tok
-
-let map_variable (env : env) (tok : CST.variable) =
-  (* pattern [a-zA-Z][a-zA-Z0-9_]* *) token env tok
 
 let map_imm_tok_pat_3d340f6 (env : env) (tok : CST.imm_tok_pat_3d340f6) =
   (* pattern \s+ *) token env tok
@@ -231,10 +231,21 @@ let map_image_tag (env : env) ((v1, v2) : CST.image_tag) =
   in
   todo env (v1, v2)
 
-let map_stopsignal_value (env : env) (xs : CST.stopsignal_value) =
+let map_user_name_or_group (env : env) (xs : CST.user_name_or_group) =
   List.map (fun x ->
     (match x with
-    | `Pat_441cd81 tok -> (* pattern [A-Z0-9]+ *) token env tok
+    | `Pat_660c06c tok ->
+        (* pattern [a-z][-a-z0-9_]* *) token env tok
+    | `Expa x -> map_expansion env x
+    )
+  ) xs
+
+let map_unquoted_string (env : env) (xs : CST.unquoted_string) =
+  List.map (fun x ->
+    (match x with
+    | `Imm_tok_pat_24a1611 tok ->
+        (* pattern "[^\\s\\n\\\"\\\\\\$]+" *) token env tok
+    | `BSLASHSPACE tok -> (* "\\ " *) token env tok
     | `Expa x -> map_expansion env x
     )
   ) xs
@@ -286,6 +297,14 @@ let map_image_alias (env : env) (xs : CST.image_alias) =
     )
   ) xs
 
+let map_stopsignal_value (env : env) (xs : CST.stopsignal_value) =
+  List.map (fun x ->
+    (match x with
+    | `Pat_441cd81 tok -> (* pattern [A-Z0-9]+ *) token env tok
+    | `Expa x -> map_expansion env x
+    )
+  ) xs
+
 let map_double_quoted_string (env : env) ((v1, v2, v3) : CST.double_quoted_string) =
   let v1 = (* "\"" *) token env v1 in
   let v2 =
@@ -300,25 +319,6 @@ let map_double_quoted_string (env : env) ((v1, v2, v3) : CST.double_quoted_strin
   in
   let v3 = (* "\"" *) token env v3 in
   todo env (v1, v2, v3)
-
-let map_user_name_or_group (env : env) (xs : CST.user_name_or_group) =
-  List.map (fun x ->
-    (match x with
-    | `Pat_660c06c tok ->
-        (* pattern [a-z][-a-z0-9_]* *) token env tok
-    | `Expa x -> map_expansion env x
-    )
-  ) xs
-
-let map_unquoted_string (env : env) (xs : CST.unquoted_string) =
-  List.map (fun x ->
-    (match x with
-    | `Imm_tok_pat_24a1611 tok ->
-        (* pattern "[^\\s\\n\\\"\\\\\\$]+" *) token env tok
-    | `BSLASHSPACE tok -> (* "\\ " *) token env tok
-    | `Expa x -> map_expansion env x
-    )
-  ) xs
 
 let map_comment_line (env : env) ((v1, v2) : CST.comment_line) =
   let v1 = map_anon_comment env v1 in
@@ -339,12 +339,18 @@ let map_expose_instruction (env : env) ((v1, v2) : CST.expose_instruction) =
   in
   todo env (v1, v2)
 
-let map_stopsignal_instruction (env : env) ((v1, v2) : CST.stopsignal_instruction) =
-  let v1 =
-    (* pattern [sS][tT][oO][pP][sS][iI][gG][nN][aA][lL] *) token env v1
+let map_user_instruction (env : env) ((v1, v2, v3) : CST.user_instruction) =
+  let v1 = (* pattern [uU][sS][eE][rR] *) token env v1 in
+  let v2 = map_user_name_or_group env v2 in
+  let v3 =
+    (match v3 with
+    | Some (v1, v2) ->
+        let v1 = (* ":" *) token env v1 in
+        let v2 = map_user_name_or_group env v2 in
+        todo env (v1, v2)
+    | None -> todo env ())
   in
-  let v2 = map_stopsignal_value env v2 in
-  todo env (v1, v2)
+  todo env (v1, v2, v3)
 
 let map_copy_instruction (env : env) ((v1, v2, v3, v4, v5) : CST.copy_instruction) =
   let v1 = (* pattern [cC][oO][pP][yY] *) token env v1 in
@@ -391,6 +397,19 @@ let map_image_spec (env : env) ((v1, v2, v3) : CST.image_spec) =
   in
   todo env (v1, v2, v3)
 
+let map_stopsignal_instruction (env : env) ((v1, v2) : CST.stopsignal_instruction) =
+  let v1 =
+    (* pattern [sS][tT][oO][pP][sS][iI][gG][nN][aA][lL] *) token env v1
+  in
+  let v2 = map_stopsignal_value env v2 in
+  todo env (v1, v2)
+
+let map_anon_choice_double_quoted_str_6b200ac (env : env) (x : CST.anon_choice_double_quoted_str_6b200ac) =
+  (match x with
+  | `Double_quoted_str x -> map_double_quoted_string env x
+  | `Unqu_str x -> map_unquoted_string env x
+  )
+
 let map_string_array (env : env) ((v1, v2, v3) : CST.string_array) =
   let v1 = (* "[" *) token env v1 in
   let v2 =
@@ -410,25 +429,6 @@ let map_string_array (env : env) ((v1, v2, v3) : CST.string_array) =
   let v3 = (* "]" *) token env v3 in
   todo env (v1, v2, v3)
 
-let map_user_instruction (env : env) ((v1, v2, v3) : CST.user_instruction) =
-  let v1 = (* pattern [uU][sS][eE][rR] *) token env v1 in
-  let v2 = map_user_name_or_group env v2 in
-  let v3 =
-    (match v3 with
-    | Some (v1, v2) ->
-        let v1 = (* ":" *) token env v1 in
-        let v2 = map_user_name_or_group env v2 in
-        todo env (v1, v2)
-    | None -> todo env ())
-  in
-  todo env (v1, v2, v3)
-
-let map_anon_choice_double_quoted_str_6b200ac (env : env) (x : CST.anon_choice_double_quoted_str_6b200ac) =
-  (match x with
-  | `Double_quoted_str x -> map_double_quoted_string env x
-  | `Unqu_str x -> map_unquoted_string env x
-  )
-
 let map_from_instruction (env : env) ((v1, v2, v3, v4) : CST.from_instruction) =
   let v1 = (* pattern [fF][rR][oO][mM] *) token env v1 in
   let v2 =
@@ -446,32 +446,6 @@ let map_from_instruction (env : env) ((v1, v2, v3, v4) : CST.from_instruction) =
     | None -> todo env ())
   in
   todo env (v1, v2, v3, v4)
-
-let map_shell_instruction (env : env) ((v1, v2) : CST.shell_instruction) =
-  let v1 = (* pattern [sS][hH][eE][lL][lL] *) token env v1 in
-  let v2 = map_string_array env v2 in
-  todo env (v1, v2)
-
-let map_volume_instruction (env : env) ((v1, v2) : CST.volume_instruction) =
-  let v1 =
-    (* pattern [vV][oO][lL][uU][mM][eE] *) token env v1
-  in
-  let v2 =
-    (match v2 with
-    | `Str_array x -> map_string_array env x
-    | `Path_rep_non_nl_whit_path (v1, v2) ->
-        let v1 = map_path env v1 in
-        let v2 =
-          List.map (fun (v1, v2) ->
-            let v1 = (* pattern [\t ]+ *) token env v1 in
-            let v2 = map_path env v2 in
-            todo env (v1, v2)
-          ) v2
-        in
-        todo env (v1, v2)
-    )
-  in
-  todo env (v1, v2)
 
 let map_arg_instruction (env : env) ((v1, v2, v3) : CST.arg_instruction) =
   let v1 = (* pattern [aA][rR][gG] *) token env v1 in
@@ -508,6 +482,32 @@ let map_label_pair (env : env) ((v1, v2, v3) : CST.label_pair) =
   let v3 = map_anon_choice_double_quoted_str_6b200ac env v3 in
   todo env (v1, v2, v3)
 
+let map_shell_instruction (env : env) ((v1, v2) : CST.shell_instruction) =
+  let v1 = (* pattern [sS][hH][eE][lL][lL] *) token env v1 in
+  let v2 = map_string_array env v2 in
+  todo env (v1, v2)
+
+let map_volume_instruction (env : env) ((v1, v2) : CST.volume_instruction) =
+  let v1 =
+    (* pattern [vV][oO][lL][uU][mM][eE] *) token env v1
+  in
+  let v2 =
+    (match v2 with
+    | `Str_array x -> map_string_array env x
+    | `Path_rep_non_nl_whit_path (v1, v2) ->
+        let v1 = map_path env v1 in
+        let v2 =
+          List.map (fun (v1, v2) ->
+            let v1 = (* pattern [\t ]+ *) token env v1 in
+            let v2 = map_path env v2 in
+            todo env (v1, v2)
+          ) v2
+        in
+        todo env (v1, v2)
+    )
+  in
+  todo env (v1, v2)
+
 let map_anon_choice_str_array_878ad0b (env : env) (x : CST.anon_choice_str_array_878ad0b) =
   (match x with
   | `Str_array x -> map_string_array env x
@@ -539,13 +539,13 @@ let map_label_instruction (env : env) ((v1, v2) : CST.label_instruction) =
   let v2 = List.map (map_label_pair env) v2 in
   todo env (v1, v2)
 
-let map_run_instruction (env : env) ((v1, v2) : CST.run_instruction) =
-  let v1 = (* pattern [rR][uU][nN] *) token env v1 in
+let map_cmd_instruction (env : env) ((v1, v2) : CST.cmd_instruction) =
+  let v1 = (* pattern [cC][mM][dD] *) token env v1 in
   let v2 = map_anon_choice_str_array_878ad0b env v2 in
   todo env (v1, v2)
 
-let map_cmd_instruction (env : env) ((v1, v2) : CST.cmd_instruction) =
-  let v1 = (* pattern [cC][mM][dD] *) token env v1 in
+let map_run_instruction (env : env) ((v1, v2) : CST.run_instruction) =
+  let v1 = (* pattern [rR][uU][nN] *) token env v1 in
   let v2 = map_anon_choice_str_array_878ad0b env v2 in
   todo env (v1, v2)
 

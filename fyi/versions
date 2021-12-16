@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: f0b8e6748238ac0a6ba10e360db5b712039db895
+Latest commit in repo: e0fa91d34a205e68ee6dee27c404b8cc79fcee0c
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,17 +10,20 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: f0b8e6748238ac0a6ba10e360db5b712039db895
+Latest commit in repo: e0fa91d34a205e68ee6dee27c404b8cc79fcee0c
 Last change in file:
-  commit d4f9099f9a45a55dc7e8a2bbfdc251201431f23a
-  Author: Camden Cheek <camden@ccheek.com>
-  Date:   Sun Jun 20 12:46:57 2021 -0600
+  commit e0fa91d34a205e68ee6dee27c404b8cc79fcee0c
+  Author: Martin Jambon <martin@mjambon.com>
+  Date:   Wed Dec 15 22:31:20 2021 -0800
   
-      simplify comment definition
+      Distinguish line continuation that can occur anywhere (in 'extras') from
+      line continuation in shell command rule so as to know which is which
+      when recovering a typed tree with ocaml-tree-sitter.
+      See https://github.com/returntocorp/ocaml-tree-sitter-core/pull/20
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 06eaf8372b7d132ce7452de3d96cd811795c2b7c
+Latest commit in repo: 08ee3dec7c8a89c3870b6983bebe7acf09027718
 Last change in file:
   commit ae94a05590ff4ce33441eccb49422e70580c6b91
   Author: Martin Jambon <martin@r2c.dev>
