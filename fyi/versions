@@ -23,11 +23,11 @@ Last change in file:
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 08ee3dec7c8a89c3870b6983bebe7acf09027718
+Latest commit in repo: ee22310787ef0432727040dea210ab9b951fd741
 Last change in file:
-  commit ae94a05590ff4ce33441eccb49422e70580c6b91
+  commit ee22310787ef0432727040dea210ab9b951fd741
   Author: Martin Jambon <martin@r2c.dev>
-  Date:   Sat Nov 13 01:31:12 2021 -0800
+  Date:   Fri Dec 24 02:17:23 2021 -0800
   
-      Simplify semgrep extensions for dockerfile
+      Add syntax extension for whole-instruction metavariable + list to-dos
 ---
