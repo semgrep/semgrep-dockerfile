@@ -14,13 +14,16 @@ type imm_tok_pat_f43f746 = Token.t (* pattern [a-z][-a-z]* *)
 type pat_441cd81 = Token.t (* pattern [A-Z0-9]+ *)
 [@@deriving sexp_of]
 
+type semgrep_metavariable = Token.t (* pattern \$[A-Z_][A-Z_0-9]* *)
+[@@deriving sexp_of]
+
 type pat_433746d = Token.t (* pattern [lL][aA][bB][eE][lL] *)
 [@@deriving sexp_of]
 
 type pat_4b81dfc = Token.t (* pattern [^\\\[\n#\s][^\\\n]* *)
 [@@deriving sexp_of]
 
-type pat_9c0a769 = Token.t (* pattern [cC][oO][pP][yY] *)
+type pat_9a14b5c = Token.t (* pattern [-a-zA-Z0-9_]+ *)
 [@@deriving sexp_of]
 
 type pat_56bd329 =
@@ -30,7 +33,7 @@ type pat_56bd329 =
 type imm_tok_pat_bcfc287 = Token.t (* pattern [^@\s\$]+ *)
 [@@deriving sexp_of]
 
-type pat_8713919 = Token.t (* pattern [^\}]+ *)
+type pat_845d48b = Token.t (* pattern [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9] *)
 [@@deriving sexp_of]
 
 type pat_808c5a1 =
@@ -47,10 +50,7 @@ type pat_5cf3c2c =
   Token.t (* pattern [mM][aA][iI][nN][tT][aA][iI][nN][eE][rR] *)
 [@@deriving sexp_of]
 
-type semgrep_metavariable = Token.t (* pattern \$[A-Z_][A-Z_0-9]* *)
-[@@deriving sexp_of]
-
-type pat_845d48b = Token.t (* pattern [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9] *)
+type pat_8165e5f = Token.t (* pattern [^@:\s\$-] *)
 [@@deriving sexp_of]
 
 type imm_tok_pat_d2727a0 = Token.t (* pattern [a-zA-Z0-9:]+ *)
@@ -59,7 +59,10 @@ type imm_tok_pat_d2727a0 = Token.t (* pattern [a-zA-Z0-9:]+ *)
 type pat_660c06c = Token.t (* pattern [a-z][-a-z0-9_]* *)
 [@@deriving sexp_of]
 
-type pat_a6040bb = Token.t (* pattern [wW][oO][rR][kK][dD][iI][rR] *)
+type pat_a368b76 = Token.t (* pattern [uU][sS][eE][rR] *)
+[@@deriving sexp_of]
+
+type pat_f2a2f8f = Token.t (* pattern [rR][uU][nN] *)
 [@@deriving sexp_of]
 
 type pat_fd0037e =
@@ -69,7 +72,7 @@ type pat_fd0037e =
 type pat_4128122 = Token.t (* pattern [-a-zA-Z0-9\._]+ *)
 [@@deriving sexp_of]
 
-type pat_ed84199 = Token.t (* pattern [aA][dD][dD] *)
+type pat_aa82a08 = Token.t (* pattern [oO][nN][bB][uU][iI][lL][dD] *)
 [@@deriving sexp_of]
 
 type pat_217c202 = Token.t (* pattern \d+ *)
@@ -84,43 +87,43 @@ type imm_tok_pat_3d340f6 = Token.t (* pattern \s+ *)
 type pat_4de4cb9 = Token.t (* pattern [a-zA-Z0-9_]+ *)
 [@@deriving sexp_of]
 
-type pat_985c208 = Token.t (* pattern [aA][rR][gG] *)
+type pat_9818882 = Token.t (* pattern [eE][xX][pP][oO][sS][eE] *)
 [@@deriving sexp_of]
 
 type pat_2b37705 = Token.t (* pattern [^@:\s\$]+ *)
 [@@deriving sexp_of]
 
-type pat_f2a2f8f = Token.t (* pattern [rR][uU][nN] *)
+type pat_f05eb95 = Token.t (* pattern \\[^\n] *)
 [@@deriving sexp_of]
 
 type pat_1c663f5 = Token.t (* pattern [vV][oO][lL][uU][mM][eE] *)
 [@@deriving sexp_of]
 
-type pat_aa82a08 = Token.t (* pattern [oO][nN][bB][uU][iI][lL][dD] *)
-[@@deriving sexp_of]
-
-type variable = Token.t (* pattern [a-zA-Z][a-zA-Z0-9_]* *)
+type pat_a6040bb = Token.t (* pattern [wW][oO][rR][kK][dD][iI][rR] *)
 [@@deriving sexp_of]
 
 type escape_sequence = Token.t
 [@@deriving sexp_of]
 
-type pat_f05eb95 = Token.t (* pattern \\[^\n] *)
+type pat_ed84199 = Token.t (* pattern [aA][dD][dD] *)
 [@@deriving sexp_of]
 
 type imm_tok_pat_f6e1de8 = Token.t (* pattern [^\s]+ *)
 [@@deriving sexp_of]
 
-type pat_9818882 = Token.t (* pattern [eE][xX][pP][oO][sS][eE] *)
+type pat_9374c10 = Token.t (* pattern [sS][hH][eE][lL][lL] *)
 [@@deriving sexp_of]
 
 type pat_5eaae97 = Token.t (* pattern [fF][rR][oO][mM] *)
 [@@deriving sexp_of]
 
-type pat_a368b76 = Token.t (* pattern [uU][sS][eE][rR] *)
+type pat_9c0a769 = Token.t (* pattern [cC][oO][pP][yY] *)
 [@@deriving sexp_of]
 
 type pat_030af88 = Token.t (* pattern [eE][nN][vV] *)
+[@@deriving sexp_of]
+
+type variable = Token.t (* pattern [a-zA-Z][a-zA-Z0-9_]* *)
 [@@deriving sexp_of]
 
 type pat_0c7fc22 = Token.t (* pattern [^\s\$]+ *)
@@ -129,13 +132,13 @@ type pat_0c7fc22 = Token.t (* pattern [^\s\$]+ *)
 type pat_239fcac = Token.t (* pattern [cC][mM][dD] *)
 [@@deriving sexp_of]
 
-type pat_9374c10 = Token.t (* pattern [sS][hH][eE][lL][lL] *)
+type pat_8713919 = Token.t (* pattern [^\}]+ *)
 [@@deriving sexp_of]
 
 type non_newline_whitespace = Token.t (* pattern [\t ]+ *)
 [@@deriving sexp_of]
 
-type pat_9a14b5c = Token.t (* pattern [-a-zA-Z0-9_]+ *)
+type pat_985c208 = Token.t (* pattern [aA][rR][gG] *)
 [@@deriving sexp_of]
 
 type comment = Token.t (* pattern #.* *)
@@ -151,31 +154,23 @@ type imm_tok_pat_589b0f8 = Token.t (* pattern "[^\"\\n\\\\\\$]+" *)
 type pat_1167a92 = Token.t (* pattern [^-\s\$] *)
 [@@deriving sexp_of]
 
-type expose_port = (
-    pat_217c202 (*tok*)
-  * [
-        `SLAS_ce91595 of Token.t (* "/tcp" *)
-      | `SLAS_c773c8d of Token.t (* "/udp" *)
-    ]
-      option
-)
+type expose_port = [
+    `Semg_ellips of Token.t (* "..." *)
+  | `Pat_217c202_opt_choice_SLAS of (
+        pat_217c202 (*tok*)
+      * [
+            `SLAS_ce91595 of Token.t (* "/tcp" *)
+          | `SLAS_c773c8d of Token.t (* "/udp" *)
+        ]
+          option
+    )
+]
 [@@deriving sexp_of]
 
 type maintainer_instruction = (pat_5cf3c2c (*tok*) * pat_4fd4a56 (*tok*))
 [@@deriving sexp_of]
 
 type anon_comment = (Token.t (* "#" *) * pat_4fd4a56 (*tok*))
-[@@deriving sexp_of]
-
-type expansion = (
-    Token.t (* "$" *)
-  * [
-        `Var of variable (*tok*)
-      | `LCURL_pat_8713919_RCURL of (
-            Token.t (* "{" *) * pat_8713919 (*tok*) * Token.t (* "}" *)
-        )
-    ]
-)
 [@@deriving sexp_of]
 
 type shell_fragment =
@@ -192,6 +187,17 @@ type param = (
 )
 [@@deriving sexp_of]
 
+type expansion = (
+    Token.t (* "$" *)
+  * [
+        `Var of variable (*tok*)
+      | `LCURL_pat_8713919_RCURL of (
+            Token.t (* "{" *) * pat_8713919 (*tok*) * Token.t (* "}" *)
+        )
+    ]
+)
+[@@deriving sexp_of]
+
 type cross_build_instruction = (pat_4a2f38a (*tok*) * pat_4fd4a56 (*tok*))
 [@@deriving sexp_of]
 
@@ -205,16 +211,18 @@ type expose_instruction = (
 )
 [@@deriving sexp_of]
 
-type user_name_or_group =
-  [ `Pat_660c06c of pat_660c06c (*tok*) | `Expa of expansion ]
+type unquoted_string =
+  [
+      `Imm_tok_pat_24a1611 of imm_tok_pat_24a1611 (*tok*)
+    | `BSLASHSPACE of Token.t (* "\\ " *)
+    | `Expa of expansion
+  ]
     list (* one or more *)
 [@@deriving sexp_of]
 
-type path = (
-    [ `Pat_1167a92 of pat_1167a92 (*tok*) | `Expa of expansion ]
-  * [ `Pat_0c7fc22 of pat_0c7fc22 (*tok*) | `Expa of expansion ]
-      list (* zero or more *)
-)
+type stopsignal_value =
+  [ `Pat_441cd81 of pat_441cd81 (*tok*) | `Expa of expansion ]
+    list (* one or more *)
 [@@deriving sexp_of]
 
 type image_alias =
@@ -232,9 +240,23 @@ type image_digest = (
 )
 [@@deriving sexp_of]
 
-type image_name =
-  [ `Pat_2b37705 of pat_2b37705 (*tok*) | `Expa of expansion ]
+type user_name_or_group =
+  [ `Pat_660c06c of pat_660c06c (*tok*) | `Expa of expansion ]
     list (* one or more *)
+[@@deriving sexp_of]
+
+type image_name = (
+    [ `Pat_8165e5f of pat_8165e5f (*tok*) | `Expa of expansion ]
+  * [ `Pat_2b37705 of pat_2b37705 (*tok*) | `Expa of expansion ]
+      list (* zero or more *)
+)
+[@@deriving sexp_of]
+
+type path = (
+    [ `Pat_1167a92 of pat_1167a92 (*tok*) | `Expa of expansion ]
+  * [ `Pat_0c7fc22 of pat_0c7fc22 (*tok*) | `Expa of expansion ]
+      list (* zero or more *)
+)
 [@@deriving sexp_of]
 
 type image_tag = (
@@ -259,18 +281,7 @@ type double_quoted_string = (
 )
 [@@deriving sexp_of]
 
-type unquoted_string =
-  [
-      `Imm_tok_pat_24a1611 of imm_tok_pat_24a1611 (*tok*)
-    | `BSLASHSPACE of Token.t (* "\\ " *)
-    | `Expa of expansion
-  ]
-    list (* one or more *)
-[@@deriving sexp_of]
-
-type stopsignal_value =
-  [ `Pat_441cd81 of pat_441cd81 (*tok*) | `Expa of expansion ]
-    list (* one or more *)
+type stopsignal_instruction = (pat_56bd329 (*tok*) * stopsignal_value)
 [@@deriving sexp_of]
 
 type user_instruction = (
@@ -304,6 +315,12 @@ type copy_instruction = (
 type image_spec = (image_name * image_tag option * image_digest option)
 [@@deriving sexp_of]
 
+type anon_choice_double_quoted_str_6b200ac = [
+    `Double_quoted_str of double_quoted_string
+  | `Unqu_str of unquoted_string
+]
+[@@deriving sexp_of]
+
 type array_element = [
     `Double_quoted_str of double_quoted_string
   | `Semg_ellips of Token.t (* "..." *)
@@ -311,20 +328,49 @@ type array_element = [
 ]
 [@@deriving sexp_of]
 
-type anon_choice_double_quoted_str_6b200ac = [
-    `Double_quoted_str of double_quoted_string
-  | `Unqu_str of unquoted_string
-]
-[@@deriving sexp_of]
-
-type stopsignal_instruction = (pat_56bd329 (*tok*) * stopsignal_value)
-[@@deriving sexp_of]
-
 type from_instruction = (
     pat_5eaae97 (*tok*)
   * param option
   * image_spec
   * (pat_79b8891 (*tok*) * image_alias) option
+)
+[@@deriving sexp_of]
+
+type arg_instruction = (
+    pat_985c208 (*tok*)
+  * [
+        `Semg_meta of semgrep_metavariable (*tok*)
+      | `Pat_4de4cb9 of pat_4de4cb9 (*tok*)
+    ]
+  * (Token.t (* "=" *) * anon_choice_double_quoted_str_6b200ac) option
+)
+[@@deriving sexp_of]
+
+type env_pair = [
+    `Semg_ellips of Token.t (* "..." *)
+  | `Env_key_EQ_choice_double_quoted_str of (
+        pat_845d48b (*tok*) * Token.t (* "=" *)
+      * anon_choice_double_quoted_str_6b200ac
+    )
+]
+[@@deriving sexp_of]
+
+type label_pair = [
+    `Semg_ellips of Token.t (* "..." *)
+  | `Choice_semg_meta_EQ_choice_double_quoted_str of (
+        [
+            `Semg_meta of semgrep_metavariable (*tok*)
+          | `Pat_4128122 of pat_4128122 (*tok*)
+        ]
+      * Token.t (* "=" *)
+      * anon_choice_double_quoted_str_6b200ac
+    )
+]
+[@@deriving sexp_of]
+
+type spaced_env_pair = (
+    pat_845d48b (*tok*) * imm_tok_pat_3d340f6 (*tok*)
+  * anon_choice_double_quoted_str_6b200ac
 )
 [@@deriving sexp_of]
 
@@ -339,32 +385,19 @@ type string_array = (
 )
 [@@deriving sexp_of]
 
-type arg_instruction = (
-    pat_985c208 (*tok*)
-  * pat_4de4cb9 (*tok*)
-  * (Token.t (* "=" *) * anon_choice_double_quoted_str_6b200ac) option
+type label_instruction = (
+    pat_433746d (*tok*)
+  * label_pair list (* one or more *)
 )
 [@@deriving sexp_of]
 
-type env_pair = (
-    pat_845d48b (*tok*) * Token.t (* "=" *)
-  * anon_choice_double_quoted_str_6b200ac
+type env_instruction = (
+    pat_030af88 (*tok*)
+  * [
+        `Rep1_env_pair of env_pair list (* one or more *)
+      | `Spaced_env_pair of spaced_env_pair
+    ]
 )
-[@@deriving sexp_of]
-
-type spaced_env_pair = (
-    pat_845d48b (*tok*) * imm_tok_pat_3d340f6 (*tok*)
-  * anon_choice_double_quoted_str_6b200ac
-)
-[@@deriving sexp_of]
-
-type label_pair = (
-    pat_4128122 (*tok*) * Token.t (* "=" *)
-  * anon_choice_double_quoted_str_6b200ac
-)
-[@@deriving sexp_of]
-
-type shell_instruction = (pat_9374c10 (*tok*) * string_array)
 [@@deriving sexp_of]
 
 type volume_instruction = (
@@ -377,6 +410,9 @@ type volume_instruction = (
         )
     ]
 )
+[@@deriving sexp_of]
+
+type shell_instruction = (pat_9374c10 (*tok*) * string_array)
 [@@deriving sexp_of]
 
 type anon_choice_str_array_878ad0b = [
@@ -393,21 +429,6 @@ type anon_choice_str_array_878ad0b = [
 ]
 [@@deriving sexp_of]
 
-type env_instruction = (
-    pat_030af88 (*tok*)
-  * [
-        `Rep1_env_pair of env_pair list (* one or more *)
-      | `Spaced_env_pair of spaced_env_pair
-    ]
-)
-[@@deriving sexp_of]
-
-type label_instruction = (
-    pat_433746d (*tok*)
-  * label_pair list (* one or more *)
-)
-[@@deriving sexp_of]
-
 type cmd_instruction = (pat_239fcac (*tok*) * anon_choice_str_array_878ad0b)
 [@@deriving sexp_of]
 
@@ -422,7 +443,8 @@ type run_instruction = (pat_f2a2f8f (*tok*) * anon_choice_str_array_878ad0b)
 type healthcheck_instruction = (
     pat_fd0037e (*tok*)
   * [
-        `NONE of Token.t (* "NONE" *)
+        `Semg_meta of semgrep_metavariable (*tok*)
+      | `NONE of Token.t (* "NONE" *)
       | `Rep_param_cmd_inst of (
             param list (* zero or more *)
           * cmd_instruction
@@ -468,10 +490,10 @@ type source_file =
 type semgrep_ellipsis (* inlined *) = Token.t (* "..." *)
 [@@deriving sexp_of]
 
-type line_continuation (* inlined *) = Token.t (* "\\\n" *)
+type required_line_continuation (* inlined *) = Token.t (* "\\\n" *)
 [@@deriving sexp_of]
 
-type required_line_continuation (* inlined *) = Token.t (* "\\\n" *)
+type line_continuation (* inlined *) = Token.t (* "\\\n" *)
 [@@deriving sexp_of]
 
 type env_key (* inlined *) = pat_845d48b (*tok*)
