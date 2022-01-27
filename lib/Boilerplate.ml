@@ -23,50 +23,50 @@ let todo (env : env) _ =
 let map_imm_tok_pat_f43f746 (env : env) (tok : CST.imm_tok_pat_f43f746) =
   (* pattern [a-z][-a-z]* *) token env tok
 
-let map_pat_441cd81 (env : env) (tok : CST.pat_441cd81) =
-  (* pattern [A-Z0-9]+ *) token env tok
+let map_pat_433746d (env : env) (tok : CST.pat_433746d) =
+  (* pattern [lL][aA][bB][eE][lL] *) token env tok
 
 let map_semgrep_metavariable (env : env) (tok : CST.semgrep_metavariable) =
   (* pattern \$[A-Z_][A-Z_0-9]* *) token env tok
 
-let map_pat_433746d (env : env) (tok : CST.pat_433746d) =
-  (* pattern [lL][aA][bB][eE][lL] *) token env tok
+let map_pat_4128122 (env : env) (tok : CST.pat_4128122) =
+  (* pattern [-a-zA-Z0-9\._]+ *) token env tok
 
-let map_pat_4b81dfc (env : env) (tok : CST.pat_4b81dfc) =
-  (* pattern [^\\\[\n#\s][^\\\n]* *) token env tok
+let map_pat_4a2f38a (env : env) (tok : CST.pat_4a2f38a) =
+  (* pattern [cC][rR][oO][sS][sS]_[bB][uU][iI][lL][dD][a-zA-Z_]* *) token env tok
 
 let map_pat_9a14b5c (env : env) (tok : CST.pat_9a14b5c) =
   (* pattern [-a-zA-Z0-9_]+ *) token env tok
 
-let map_pat_56bd329 (env : env) (tok : CST.pat_56bd329) =
-  (* pattern [sS][tT][oO][pP][sS][iI][gG][nN][aA][lL] *) token env tok
+let map_pat_4fd4a56 (env : env) (tok : CST.pat_4fd4a56) =
+  (* pattern .* *) token env tok
 
 let map_imm_tok_pat_bcfc287 (env : env) (tok : CST.imm_tok_pat_bcfc287) =
   (* pattern [^@\s\$]+ *) token env tok
 
-let map_pat_845d48b (env : env) (tok : CST.pat_845d48b) =
-  (* pattern [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9] *) token env tok
-
-let map_pat_808c5a1 (env : env) (tok : CST.pat_808c5a1) =
-  (* pattern [eE][nN][tT][rR][yY][pP][oO][iI][nN][tT] *) token env tok
+let map_pat_8165e5f (env : env) (tok : CST.pat_8165e5f) =
+  (* pattern [^@:\s\$-] *) token env tok
 
 let map_pat_79b8891 (env : env) (tok : CST.pat_79b8891) =
   (* pattern [aA][sS] *) token env tok
 
+let map_pat_660c06c (env : env) (tok : CST.pat_660c06c) =
+  (* pattern [a-z][-a-z0-9_]* *) token env tok
+
 let map_imm_tok_pat_24a1611 (env : env) (tok : CST.imm_tok_pat_24a1611) =
   (* pattern "[^\\s\\n\\\"\\\\\\$]+" *) token env tok
 
-let map_pat_5cf3c2c (env : env) (tok : CST.pat_5cf3c2c) =
-  (* pattern [mM][aA][iI][nN][tT][aA][iI][nN][eE][rR] *) token env tok
+let map_pat_56bd329 (env : env) (tok : CST.pat_56bd329) =
+  (* pattern [sS][tT][oO][pP][sS][iI][gG][nN][aA][lL] *) token env tok
 
-let map_pat_8165e5f (env : env) (tok : CST.pat_8165e5f) =
-  (* pattern [^@:\s\$-] *) token env tok
+let map_pat_808c5a1 (env : env) (tok : CST.pat_808c5a1) =
+  (* pattern [eE][nN][tT][rR][yY][pP][oO][iI][nN][tT] *) token env tok
 
 let map_imm_tok_pat_d2727a0 (env : env) (tok : CST.imm_tok_pat_d2727a0) =
   (* pattern [a-zA-Z0-9:]+ *) token env tok
 
-let map_pat_660c06c (env : env) (tok : CST.pat_660c06c) =
-  (* pattern [a-z][-a-z0-9_]* *) token env tok
+let map_pat_5eaae97 (env : env) (tok : CST.pat_5eaae97) =
+  (* pattern [fF][rR][oO][mM] *) token env tok
 
 let map_pat_a368b76 (env : env) (tok : CST.pat_a368b76) =
   (* pattern [uU][sS][eE][rR] *) token env tok
@@ -77,35 +77,35 @@ let map_pat_f2a2f8f (env : env) (tok : CST.pat_f2a2f8f) =
 let map_pat_fd0037e (env : env) (tok : CST.pat_fd0037e) =
   (* pattern [hH][eE][aA][lL][tT][hH][cC][hH][eE][cC][kK] *) token env tok
 
-let map_pat_4128122 (env : env) (tok : CST.pat_4128122) =
-  (* pattern [-a-zA-Z0-9\._]+ *) token env tok
+let map_pat_2b37705 (env : env) (tok : CST.pat_2b37705) =
+  (* pattern [^@:\s\$]+ *) token env tok
 
 let map_pat_aa82a08 (env : env) (tok : CST.pat_aa82a08) =
   (* pattern [oO][nN][bB][uU][iI][lL][dD] *) token env tok
 
-let map_pat_217c202 (env : env) (tok : CST.pat_217c202) =
-  (* pattern \d+ *) token env tok
-
-let map_pat_4fd4a56 (env : env) (tok : CST.pat_4fd4a56) =
-  (* pattern .* *) token env tok
-
-let map_imm_tok_pat_3d340f6 (env : env) (tok : CST.imm_tok_pat_3d340f6) =
-  (* pattern \s+ *) token env tok
+let map_pat_1c663f5 (env : env) (tok : CST.pat_1c663f5) =
+  (* pattern [vV][oO][lL][uU][mM][eE] *) token env tok
 
 let map_pat_4de4cb9 (env : env) (tok : CST.pat_4de4cb9) =
   (* pattern [a-zA-Z0-9_]+ *) token env tok
 
+let map_imm_tok_pat_3d340f6 (env : env) (tok : CST.imm_tok_pat_3d340f6) =
+  (* pattern \s+ *) token env tok
+
+let map_pat_4b81dfc (env : env) (tok : CST.pat_4b81dfc) =
+  (* pattern [^\\\[\n#\s][^\\\n]* *) token env tok
+
 let map_pat_9818882 (env : env) (tok : CST.pat_9818882) =
   (* pattern [eE][xX][pP][oO][sS][eE] *) token env tok
 
-let map_pat_2b37705 (env : env) (tok : CST.pat_2b37705) =
-  (* pattern [^@:\s\$]+ *) token env tok
+let map_pat_239fcac (env : env) (tok : CST.pat_239fcac) =
+  (* pattern [cC][mM][dD] *) token env tok
 
 let map_pat_f05eb95 (env : env) (tok : CST.pat_f05eb95) =
   (* pattern \\[^\n] *) token env tok
 
-let map_pat_1c663f5 (env : env) (tok : CST.pat_1c663f5) =
-  (* pattern [vV][oO][lL][uU][mM][eE] *) token env tok
+let map_pat_18946a5 (env : env) (tok : CST.pat_18946a5) =
+  (* pattern [a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])? *) token env tok
 
 let map_pat_a6040bb (env : env) (tok : CST.pat_a6040bb) =
   (* pattern [wW][oO][rR][kK][dD][iI][rR] *) token env tok
@@ -122,8 +122,8 @@ let map_imm_tok_pat_f6e1de8 (env : env) (tok : CST.imm_tok_pat_f6e1de8) =
 let map_pat_9374c10 (env : env) (tok : CST.pat_9374c10) =
   (* pattern [sS][hH][eE][lL][lL] *) token env tok
 
-let map_pat_5eaae97 (env : env) (tok : CST.pat_5eaae97) =
-  (* pattern [fF][rR][oO][mM] *) token env tok
+let map_pat_5cf3c2c (env : env) (tok : CST.pat_5cf3c2c) =
+  (* pattern [mM][aA][iI][nN][tT][aA][iI][nN][eE][rR] *) token env tok
 
 let map_pat_9c0a769 (env : env) (tok : CST.pat_9c0a769) =
   (* pattern [cC][oO][pP][yY] *) token env tok
@@ -137,8 +137,8 @@ let map_variable (env : env) (tok : CST.variable) =
 let map_pat_0c7fc22 (env : env) (tok : CST.pat_0c7fc22) =
   (* pattern [^\s\$]+ *) token env tok
 
-let map_pat_239fcac (env : env) (tok : CST.pat_239fcac) =
-  (* pattern [cC][mM][dD] *) token env tok
+let map_pat_217c202 (env : env) (tok : CST.pat_217c202) =
+  (* pattern \d+ *) token env tok
 
 let map_pat_8713919 (env : env) (tok : CST.pat_8713919) =
   (* pattern [^\}]+ *) token env tok
@@ -152,8 +152,8 @@ let map_pat_985c208 (env : env) (tok : CST.pat_985c208) =
 let map_comment (env : env) (tok : CST.comment) =
   (* pattern #.* *) token env tok
 
-let map_pat_4a2f38a (env : env) (tok : CST.pat_4a2f38a) =
-  (* pattern [cC][rR][oO][sS][sS]_[bB][uU][iI][lL][dD][a-zA-Z_]* *) token env tok
+let map_pat_441cd81 (env : env) (tok : CST.pat_441cd81) =
+  (* pattern [A-Z0-9]+ *) token env tok
 
 let map_imm_tok_pat_589b0f8 (env : env) (tok : CST.imm_tok_pat_589b0f8) =
   (* pattern "[^\"\\n\\\\\\$]+" *) token env tok
@@ -161,32 +161,15 @@ let map_imm_tok_pat_589b0f8 (env : env) (tok : CST.imm_tok_pat_589b0f8) =
 let map_pat_1167a92 (env : env) (tok : CST.pat_1167a92) =
   (* pattern [^-\s\$] *) token env tok
 
-let map_expose_port (env : env) (x : CST.expose_port) =
-  (match x with
-  | `Semg_ellips tok -> (* "..." *) token env tok
-  | `Pat_217c202_opt_choice_SLAS (v1, v2) ->
-      let v1 = (* pattern \d+ *) token env v1 in
-      let v2 =
-        (match v2 with
-        | Some x ->
-            (match x with
-            | `SLAS_ce91595 tok -> (* "/tcp" *) token env tok
-            | `SLAS_c773c8d tok -> (* "/udp" *) token env tok
-            )
-        | None -> todo env ())
-      in
-      todo env (v1, v2)
-  )
-
-let map_maintainer_instruction (env : env) ((v1, v2) : CST.maintainer_instruction) =
-  let v1 =
-    (* pattern [mM][aA][iI][nN][tT][aA][iI][nN][eE][rR] *) token env v1
-  in
+let map_anon_comment (env : env) ((v1, v2) : CST.anon_comment) =
+  let v1 = (* "#" *) token env v1 in
   let v2 = (* pattern .* *) token env v2 in
   todo env (v1, v2)
 
-let map_anon_comment (env : env) ((v1, v2) : CST.anon_comment) =
-  let v1 = (* "#" *) token env v1 in
+let map_cross_build_instruction (env : env) ((v1, v2) : CST.cross_build_instruction) =
+  let v1 =
+    (* pattern [cC][rR][oO][sS][sS]_[bB][uU][iI][lL][dD][a-zA-Z_]* *) token env v1
+  in
   let v2 = (* pattern .* *) token env v2 in
   todo env (v1, v2)
 
@@ -206,6 +189,30 @@ let map_param (env : env) ((v1, v2, v3, v4) : CST.param) =
   let v4 = (* pattern [^\s]+ *) token env v4 in
   todo env (v1, v2, v3, v4)
 
+let map_maintainer_instruction (env : env) ((v1, v2) : CST.maintainer_instruction) =
+  let v1 =
+    (* pattern [mM][aA][iI][nN][tT][aA][iI][nN][eE][rR] *) token env v1
+  in
+  let v2 = (* pattern .* *) token env v2 in
+  todo env (v1, v2)
+
+let map_expose_port (env : env) (x : CST.expose_port) =
+  (match x with
+  | `Semg_ellips tok -> (* "..." *) token env tok
+  | `Pat_217c202_opt_choice_SLAS (v1, v2) ->
+      let v1 = (* pattern \d+ *) token env v1 in
+      let v2 =
+        (match v2 with
+        | Some x ->
+            (match x with
+            | `SLAS_ce91595 tok -> (* "/tcp" *) token env tok
+            | `SLAS_c773c8d tok -> (* "/udp" *) token env tok
+            )
+        | None -> todo env ())
+      in
+      todo env (v1, v2)
+  )
+
 let map_expansion (env : env) ((v1, v2) : CST.expansion) =
   let v1 = (* "$" *) token env v1 in
   let v2 =
@@ -219,13 +226,6 @@ let map_expansion (env : env) ((v1, v2) : CST.expansion) =
         todo env (v1, v2, v3)
     )
   in
-  todo env (v1, v2)
-
-let map_cross_build_instruction (env : env) ((v1, v2) : CST.cross_build_instruction) =
-  let v1 =
-    (* pattern [cC][rR][oO][sS][sS]_[bB][uU][iI][lL][dD][a-zA-Z_]* *) token env v1
-  in
-  let v2 = (* pattern .* *) token env v2 in
   todo env (v1, v2)
 
 let map_comment_line (env : env) ((v1, v2) : CST.comment_line) =
@@ -385,29 +385,39 @@ let map_workdir_instruction (env : env) ((v1, v2) : CST.workdir_instruction) =
   let v2 = map_path env v2 in
   todo env (v1, v2)
 
-let map_add_instruction (env : env) ((v1, v2, v3, v4, v5) : CST.add_instruction) =
+let map_add_instruction (env : env) ((v1, v2, v3, v4) : CST.add_instruction) =
   let v1 = (* pattern [aA][dD][dD] *) token env v1 in
   let v2 =
     (match v2 with
     | Some x -> map_param env x
     | None -> todo env ())
   in
-  let v3 = map_path env v3 in
-  let v4 = (* pattern [\t ]+ *) token env v4 in
-  let v5 = map_path env v5 in
-  todo env (v1, v2, v3, v4, v5)
+  let v3 =
+    List.map (fun (v1, v2) ->
+      let v1 = map_path env v1 in
+      let v2 = (* pattern [\t ]+ *) token env v2 in
+      todo env (v1, v2)
+    ) v3
+  in
+  let v4 = map_path env v4 in
+  todo env (v1, v2, v3, v4)
 
-let map_copy_instruction (env : env) ((v1, v2, v3, v4, v5) : CST.copy_instruction) =
+let map_copy_instruction (env : env) ((v1, v2, v3, v4) : CST.copy_instruction) =
   let v1 = (* pattern [cC][oO][pP][yY] *) token env v1 in
   let v2 =
     (match v2 with
     | Some x -> map_param env x
     | None -> todo env ())
   in
-  let v3 = map_path env v3 in
-  let v4 = (* pattern [\t ]+ *) token env v4 in
-  let v5 = map_path env v5 in
-  todo env (v1, v2, v3, v4, v5)
+  let v3 =
+    List.map (fun (v1, v2) ->
+      let v1 = map_path env v1 in
+      let v2 = (* pattern [\t ]+ *) token env v2 in
+      todo env (v1, v2)
+    ) v3
+  in
+  let v4 = map_path env v4 in
+  todo env (v1, v2, v3, v4)
 
 let map_image_spec (env : env) ((v1, v2, v3) : CST.image_spec) =
   let v1 = map_image_name env v1 in
@@ -478,12 +488,16 @@ let map_arg_instruction (env : env) ((v1, v2, v3) : CST.arg_instruction) =
 let map_env_pair (env : env) (x : CST.env_pair) =
   (match x with
   | `Semg_ellips tok -> (* "..." *) token env tok
-  | `Env_key_EQ_choice_double_quoted_str (v1, v2, v3) ->
+  | `Env_key_EQ_opt_choice_double_quoted_str (v1, v2, v3) ->
       let v1 =
-        (* pattern [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9] *) token env v1
+        (* pattern [a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])? *) token env v1
       in
       let v2 = (* "=" *) token env v2 in
-      let v3 = map_anon_choice_double_quoted_str_6b200ac env v3 in
+      let v3 =
+        (match v3 with
+        | Some x -> map_anon_choice_double_quoted_str_6b200ac env x
+        | None -> todo env ())
+      in
       todo env (v1, v2, v3)
   )
 
@@ -506,7 +520,7 @@ let map_label_pair (env : env) (x : CST.label_pair) =
 
 let map_spaced_env_pair (env : env) ((v1, v2, v3) : CST.spaced_env_pair) =
   let v1 =
-    (* pattern [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9] *) token env v1
+    (* pattern [a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])? *) token env v1
   in
   let v2 = (* pattern \s+ *) token env v2 in
   let v3 = map_anon_choice_double_quoted_str_6b200ac env v3 in
@@ -575,17 +589,18 @@ let map_shell_instruction (env : env) ((v1, v2) : CST.shell_instruction) =
 let map_anon_choice_str_array_878ad0b (env : env) (x : CST.anon_choice_str_array_878ad0b) =
   (match x with
   | `Str_array x -> map_string_array env x
-  | `Shell_cmd (v1, v2) ->
-      let v1 = map_shell_fragment env v1 in
-      let v2 =
+  | `Shell_cmd (v1, v2, v3) ->
+      let v1 = List.map (map_comment_line env) v1 in
+      let v2 = map_shell_fragment env v2 in
+      let v3 =
         List.map (fun (v1, v2, v3) ->
           let v1 = (* "\\\n" *) token env v1 in
           let v2 = List.map (map_comment_line env) v2 in
           let v3 = map_shell_fragment env v3 in
           todo env (v1, v2, v3)
-        ) v2
+        ) v3
       in
-      todo env (v1, v2)
+      todo env (v1, v2, v3)
   )
 
 let map_cmd_instruction (env : env) ((v1, v2) : CST.cmd_instruction) =
