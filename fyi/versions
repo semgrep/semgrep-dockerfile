@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: d34a0cebd094e830bdd2106a28cb2f1fb22401d8
+Latest commit in repo: dd2673d44ca327217313be5351855398705e54c7
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,25 +10,24 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: d34a0cebd094e830bdd2106a28cb2f1fb22401d8
+Latest commit in repo: dd2673d44ca327217313be5351855398705e54c7
 Last change in file:
-  commit d34a0cebd094e830bdd2106a28cb2f1fb22401d8
-  Author: Camden Cheek <camden@ccheek.com>
-  Date:   Thu Jan 27 11:20:14 2022 -0700
+  commit edb5613f525c748a125d4e079493f5683aa66332
+  Author: Martin Jambon <martin@r2c.dev>
+  Date:   Wed Jan 5 15:27:43 2022 -0800
   
-      allow one-letter environment variables
+      Simplify pattern
       
-      This fixes issue #11. Previously, we required environment variable names
-      to be one ASCII letter followed by one or more characters, but this
-      makes the following characters optional.
+      Co-authored-by: Camden Cheek <camden@ccheek.com>
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 15a4c52727a33b21da15a8a7adfc9776be13af4e
+Latest commit in repo: aa0622f73b2d7379f17157e206ce0809bc7106ca
 Last change in file:
-  commit 6844dc723234ddef539cd0b899f1edf81eac8a27
+  commit aa0622f73b2d7379f17157e206ce0809bc7106ca
   Author: Martin Jambon <martin@r2c.dev>
-  Date:   Wed Jan 12 00:19:16 2022 -0800
+  Date:   Tue Mar 15 00:16:16 2022 -0700
   
-      Add support for metavariables in LABEL instructions
+      Extend dockerfile grammar to identify ellipses placed as the only
+      argument of a CMD/RUN/... instruction.
 ---

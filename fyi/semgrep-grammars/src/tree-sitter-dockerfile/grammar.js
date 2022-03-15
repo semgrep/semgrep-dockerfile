@@ -68,9 +68,8 @@ module.exports = grammar({
       seq(
         alias(/[aA][dD][dD]/, "ADD"),
         optional($.param),
-        repeat1(
-          seq($.path, $._non_newline_whitespace)
-        ),
+        $.path,
+        $._non_newline_whitespace,
         $.path
       ),
 
@@ -78,9 +77,8 @@ module.exports = grammar({
       seq(
         alias(/[cC][oO][pP][yY]/, "COPY"),
         optional($.param),
-        repeat1(
-          seq($.path, $._non_newline_whitespace)
-        ),
+        $.path,
+        $._non_newline_whitespace,
         $.path
       ),
 
@@ -182,9 +180,7 @@ module.exports = grammar({
       seq(
         field("name", $._env_key),
         token.immediate("="),
-        optional(
-          field("value", choice($.double_quoted_string, $.unquoted_string))
-        )
+        field("value", choice($.double_quoted_string, $.unquoted_string))
       ),
 
     _spaced_env_pair: ($) =>
@@ -195,7 +191,7 @@ module.exports = grammar({
       ),
 
     _env_key: ($) =>
-      alias(/[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])?/, $.unquoted_string),
+      alias(/[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]/, $.unquoted_string),
 
     expose_port: ($) => seq(/\d+/, optional(choice("/tcp", "/udp"))),
 
@@ -215,11 +211,10 @@ module.exports = grammar({
         )
       ),
 
-    image_name: ($) =>
-      seq(
-        choice(/[^@:\s\$-]/, $.expansion),
-        repeat(choice(/[^@:\s\$]+/, $.expansion))
-      ),
+    image_name: ($) => seq(
+      choice(/[^@:\s\$-]/, $.expansion),
+      repeat(choice(/[^@:\s\$]+/, $.expansion))
+    ),
 
     image_tag: ($) =>
       seq(
@@ -254,13 +249,11 @@ module.exports = grammar({
 
     shell_command: ($) =>
       seq(
-        repeat($._comment_line),
         $.shell_fragment,
         repeat(
           seq(
             alias($.required_line_continuation, $.line_continuation),
-            repeat($._comment_line),
-            $.shell_fragment
+            repeat($._comment_line), $.shell_fragment
           )
         )
       ),
