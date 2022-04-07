@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: dd2673d44ca327217313be5351855398705e54c7
+Latest commit in repo: 25c71d6a24cdba8f0c74ef40d4d2d93defd7e196
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,19 +10,20 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: dd2673d44ca327217313be5351855398705e54c7
+Latest commit in repo: 25c71d6a24cdba8f0c74ef40d4d2d93defd7e196
 Last change in file:
-  commit edb5613f525c748a125d4e079493f5683aa66332
-  Author: Martin Jambon <martin@r2c.dev>
-  Date:   Wed Jan 5 15:27:43 2022 -0800
+  commit d8defd6796b230fd49b18005ffbf608de3933d1d
+  Author: Martin Jambon <martin@mjambon.com>
+  Date:   Mon Apr 4 19:08:03 2022 -0700
   
-      Simplify pattern
-      
-      Co-authored-by: Camden Cheek <camden@ccheek.com>
+      Disallow whitespace in some multi-fragment constructs.
+      This is more correct and more robust when rules are reordered, see
+      https://github.com/camdencheek/tree-sitter-dockerfile/issues/18 and
+      https://github.com/camdencheek/tree-sitter-dockerfile/issues/19
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: aa0622f73b2d7379f17157e206ce0809bc7106ca
+Latest commit in repo: a1e2282237b4dda4aeebed19a9c3ddede1b265ec
 Last change in file:
   commit aa0622f73b2d7379f17157e206ce0809bc7106ca
   Author: Martin Jambon <martin@r2c.dev>
