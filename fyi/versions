@@ -1,26 +1,30 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: fe5310319565b71813397a15f21af0e988cc626a
+Latest commit in repo: 25c71d6a24cdba8f0c74ef40d4d2d93defd7e196
 Last change in file:
-  commit b25f86c3b2ec4192d040432a1a279861df390762
+  commit 25c71d6a24cdba8f0c74ef40d4d2d93defd7e196
   Author: Camden Cheek <camden@ccheek.com>
-  Date:   Tue May 11 20:01:30 2021 -0600
+  Date:   Tue Apr 5 11:19:43 2022 -0600
   
-      Add MIT license
+      Merge pull request #20 from returntocorp/sticky-tokens
+      
+      Disallow whitespace in some multi-fragment constructs.
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: fe5310319565b71813397a15f21af0e988cc626a
+Latest commit in repo: 25c71d6a24cdba8f0c74ef40d4d2d93defd7e196
 Last change in file:
-  commit 74902736139bfbd1258f940df4c035c3ec57b929
-  Author: Martin Jambon <martin@mjambon.com>
-  Date:   Tue Oct 25 19:48:10 2022 -0700
+  commit 25c71d6a24cdba8f0c74ef40d4d2d93defd7e196
+  Author: Camden Cheek <camden@ccheek.com>
+  Date:   Tue Apr 5 11:19:43 2022 -0600
   
-      Add support for options after RUN
+      Merge pull request #20 from returntocorp/sticky-tokens
+      
+      Disallow whitespace in some multi-fragment constructs.
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 359114e041ad6bbe6a12418b53148e2741cbc4b0
+Latest commit in repo: b6966e40776079d0736ff834fa042e225aa49034
 Last change in file:
   commit aa0622f73b2d7379f17157e206ce0809bc7106ca
   Author: Martin Jambon <martin@r2c.dev>
