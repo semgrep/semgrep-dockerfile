@@ -608,6 +608,7 @@ let children_regexps : (string * Run.exp option) list = [
         Token (Name "imm_tok_eq");
         Alt [|
           Token (Name "double_quoted_string");
+          Token (Name "single_quoted_string");
           Token (Name "unquoted_string");
         |];
       ];
@@ -626,6 +627,7 @@ let children_regexps : (string * Run.exp option) list = [
           Token (Name "imm_tok_eq");
           Alt [|
             Token (Name "double_quoted_string");
+            Token (Name "single_quoted_string");
             Token (Name "unquoted_string");
           |];
         ];
@@ -2190,6 +2192,10 @@ let trans_label_pair ((kind, body) : mt) : CST.label_pair =
                         trans_double_quoted_string (Run.matcher_token v)
                       )
                   | Alt (1, v) ->
+                      `Single_quoted_str (
+                        trans_single_quoted_string (Run.matcher_token v)
+                      )
+                  | Alt (2, v) ->
                       `Unqu_str (
                         trans_unquoted_string (Run.matcher_token v)
                       )
@@ -2234,6 +2240,10 @@ let trans_arg_instruction ((kind, body) : mt) : CST.arg_instruction =
                             trans_double_quoted_string (Run.matcher_token v)
                           )
                       | Alt (1, v) ->
+                          `Single_quoted_str (
+                            trans_single_quoted_string (Run.matcher_token v)
+                          )
+                      | Alt (2, v) ->
                           `Unqu_str (
                             trans_unquoted_string (Run.matcher_token v)
                           )

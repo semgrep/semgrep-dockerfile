@@ -20,11 +20,12 @@ Last change in file:
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 5d3d860f7366cce001114b13e736d83c4b64e17e
+Latest commit in repo: f3fc1aba412d9c6f8563aef4fd8bd1d28739c169
 Last change in file:
-  commit 5d3d860f7366cce001114b13e736d83c4b64e17e
+  commit f3fc1aba412d9c6f8563aef4fd8bd1d28739c169
   Author: Martin Jambon <martin@r2c.dev>
-  Date:   Wed Jul 5 18:36:00 2023 -0700
+  Date:   Thu Jul 6 11:43:26 2023 -0700
   
-      Update dockerfile parser
+      Add missing choice for single-quoted strings in extended grammar
+      (was due to copy-pasting-editing the original grammar)
 ---
