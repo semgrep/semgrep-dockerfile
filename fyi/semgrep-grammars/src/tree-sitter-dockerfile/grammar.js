@@ -46,13 +46,13 @@ module.exports = grammar({
             $.mount_param
           )
         ),
-        choice($.string_array, $.shell_command)
+        choice($.json_string_array, $.shell_command)
       ),
 
     cmd_instruction: ($) =>
       seq(
         alias(/[cC][mM][dD]/, "CMD"),
-        choice($.string_array, $.shell_command)
+        choice($.json_string_array, $.shell_command)
       ),
 
     label_instruction: ($) =>
@@ -93,14 +93,14 @@ module.exports = grammar({
     entrypoint_instruction: ($) =>
       seq(
         alias(/[eE][nN][tT][rR][yY][pP][oO][iI][nN][tT]/, "ENTRYPOINT"),
-        choice($.string_array, $.shell_command)
+        choice($.json_string_array, $.shell_command)
       ),
 
     volume_instruction: ($) =>
       seq(
         alias(/[vV][oO][lL][uU][mM][eE]/, "VOLUME"),
         choice(
-          $.string_array,
+          $.json_string_array,
           seq($.path, repeat(seq($._non_newline_whitespace, $.path)))
         )
       ),
@@ -120,7 +120,7 @@ module.exports = grammar({
 
     _user_name_or_group: ($) =>
       seq(
-        choice(/([a-z][-a-z0-9_]*|[0-9]+)/, $.expansion),
+        choice(/([a-zA-Z][-A-Za-z0-9_]*|[0-9]+)/, $.expansion),
         repeat($._immediate_user_name_or_group_fragment)
       ),
 
@@ -130,7 +130,7 @@ module.exports = grammar({
 
     _immediate_user_name_or_group_fragment: ($) =>
       choice(
-        token.immediate(/([a-z][-a-z0-9_]*|[0-9]+)/),
+        token.immediate(/([a-zA-Z][-a-zA-Z0-9_]*|[0-9]+)/),
         $._immediate_expansion
       ),
 
@@ -144,7 +144,12 @@ module.exports = grammar({
         optional(
           seq(
             token.immediate("="),
-            field("default", choice($.double_quoted_string, $.unquoted_string))
+            field("default",
+                  choice(
+                    $.double_quoted_string,
+                    $.single_quoted_string,
+                    $.unquoted_string
+                  ))
           )
         )
       ),
@@ -171,7 +176,7 @@ module.exports = grammar({
       ),
 
     shell_instruction: ($) =>
-      seq(alias(/[sS][hH][eE][lL][lL]/, "SHELL"), $.string_array),
+      seq(alias(/[sS][hH][eE][lL][lL]/, "SHELL"), $.json_string_array),
 
     maintainer_instruction: ($) =>
       seq(
@@ -215,14 +220,19 @@ module.exports = grammar({
         )
       ),
 
-    variable: ($) => token.immediate(/[a-zA-Z][a-zA-Z0-9_]*/),
+    variable: ($) => token.immediate(/[a-zA-Z_][a-zA-Z0-9_]*/),
 
     env_pair: ($) =>
       seq(
         field("name", $._env_key),
         token.immediate("="),
         optional(
-          field("value", choice($.double_quoted_string, $.unquoted_string))
+          field("value",
+                choice(
+                  $.double_quoted_string,
+                  $.single_quoted_string,
+                  $.unquoted_string
+                ))
         )
       ),
 
@@ -230,11 +240,16 @@ module.exports = grammar({
       seq(
         field("name", $._env_key),
         token.immediate(/\s+/),
-        field("value", choice($.double_quoted_string, $.unquoted_string))
+        field("value",
+              choice(
+                $.double_quoted_string,
+                $.single_quoted_string,
+                $.unquoted_string
+              ))
       ),
 
     _env_key: ($) =>
-      alias(/[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])?/, $.unquoted_string),
+      alias(/[a-zA-Z_][a-zA-Z0-9_]*/, $.unquoted_string),
 
     expose_port: ($) => seq(/\d+/, optional(choice("/tcp", "/udp"))),
 
@@ -242,7 +257,12 @@ module.exports = grammar({
       seq(
         field("key", alias(/[-a-zA-Z0-9\._]+/, $.unquoted_string)),
         token.immediate("="),
-        field("value", choice($.double_quoted_string, $.unquoted_string))
+        field("value",
+              choice(
+                $.double_quoted_string,
+                $.single_quoted_string,
+                $.unquoted_string
+              ))
       ),
 
     image_spec: ($) =>
@@ -311,15 +331,6 @@ module.exports = grammar({
       repeat(choice(token.immediate(/[-a-zA-Z0-9_]+/), $._immediate_expansion))
     ),
 
-    string_array: ($) =>
-      seq(
-        "[",
-        optional(
-          seq($.double_quoted_string, repeat(seq(",", $.double_quoted_string)))
-        ),
-        "]"
-      ),
-
     shell_command: ($) =>
       seq(
         repeat($._comment_line),
@@ -359,41 +370,83 @@ module.exports = grammar({
 
     _anon_comment: ($) => seq("#", /.*/),
 
+    json_string_array: ($) =>
+      seq(
+        "[",
+        optional(
+          seq($.json_string, repeat(seq(",", $.json_string)))
+        ),
+        "]"
+      ),
+
+    // Note that JSON strings are different from the other double-quoted
+    // strings. They don't support $-expansions.
+    // Convenient reference: https://www.json.org/
+    json_string: ($) => seq(
+      '"',
+      repeat(
+        choice(
+          token.immediate(/[^"\\]+/),
+          alias($.json_escape_sequence, $.escape_sequence)
+        )
+      ),
+      '"'
+    ),
+
+    json_escape_sequence: ($) => token.immediate(
+      /\\(?:["\\/bfnrt]|u[0-9A-Fa-f]{4})/
+    ),
+
     double_quoted_string: ($) =>
       seq(
         '"',
         repeat(
           choice(
             token.immediate(/[^"\n\\\$]+/),
-            $.escape_sequence,
+            alias($.double_quoted_escape_sequence, $.escape_sequence),
+            "\\",
             $._immediate_expansion
           )
         ),
         '"'
       ),
 
+    // same as double_quoted_string but without $-expansions:
+    single_quoted_string: ($) =>
+      seq(
+        "'",
+        repeat(
+          choice(
+            token.immediate(/[^'\n\\]+/),
+            alias($.single_quoted_escape_sequence, $.escape_sequence),
+            "\\",
+          )
+        ),
+        "'"
+      ),
+
     unquoted_string: ($) =>
       repeat1(
         choice(
-          token.immediate(/[^\s\n\"\\\$]+/),
+          token.immediate(/[^\s\n\"'\\\$]+/),
           token.immediate("\\ "),
           $._immediate_expansion
         )
       ),
 
-    escape_sequence: ($) =>
-      token.immediate(
-        seq(
-          "\\",
-          choice(
-            /[^xuU]/,
-            /\d{2,3}/,
-            /x[0-9a-fA-F]{2,}/,
-            /u[0-9a-fA-F]{4}/,
-            /U[0-9a-fA-F]{8}/
-          )
-        )
-      ),
+    double_quoted_escape_sequence: ($) => token.immediate(
+      choice(
+        "\\\\",
+        "\\\""
+      )
+    ),
+
+    single_quoted_escape_sequence: ($) => token.immediate(
+      choice(
+        "\\\\",
+        "\\'"
+      )
+    ),
 
     _non_newline_whitespace: ($) => /[\t ]+/,
 

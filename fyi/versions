@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: fe5310319565b71813397a15f21af0e988cc626a
+Latest commit in repo: 2a43a1c18400410b3ece3e6c98c14f5addf03800
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,22 +10,21 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: fe5310319565b71813397a15f21af0e988cc626a
+Latest commit in repo: 2a43a1c18400410b3ece3e6c98c14f5addf03800
 Last change in file:
-  commit 74902736139bfbd1258f940df4c035c3ec57b929
+  commit bd355ef2d116f71e9561f3e2585241bf74b0fd55
   Author: Martin Jambon <martin@mjambon.com>
-  Date:   Tue Oct 25 19:48:10 2022 -0700
+  Date:   Fri Jun 23 14:54:29 2023 -0700
   
-      Add support for options after RUN
+      Produce CST nodes for the different kinds of JSON string fragments
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: e3d08f10f24a29134d65ab519dcc04eec261047b
+Latest commit in repo: 5d3d860f7366cce001114b13e736d83c4b64e17e
 Last change in file:
-  commit aa0622f73b2d7379f17157e206ce0809bc7106ca
+  commit 5d3d860f7366cce001114b13e736d83c4b64e17e
   Author: Martin Jambon <martin@r2c.dev>
-  Date:   Tue Mar 15 00:16:16 2022 -0700
+  Date:   Wed Jul 5 18:36:00 2023 -0700
   
-      Extend dockerfile grammar to identify ellipses placed as the only
-      argument of a CMD/RUN/... instruction.
+      Update dockerfile parser
 ---
