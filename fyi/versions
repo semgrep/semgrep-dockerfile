@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: c0a9d694d9bf8ab79a919f5f9c7bc9c169caf321
+Latest commit in repo: 439c3e7b8a9bfdbf1f7d7c2beaae4173dc484cbf
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,22 +10,21 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: c0a9d694d9bf8ab79a919f5f9c7bc9c169caf321
+Latest commit in repo: 439c3e7b8a9bfdbf1f7d7c2beaae4173dc484cbf
 Last change in file:
-  commit bd355ef2d116f71e9561f3e2585241bf74b0fd55
-  Author: Martin Jambon <martin@mjambon.com>
-  Date:   Fri Jun 23 14:54:29 2023 -0700
+  commit 439c3e7b8a9bfdbf1f7d7c2beaae4173dc484cbf
+  Author: Camden Cheek <camden@ccheek.com>
+  Date:   Fri Apr 19 15:28:09 2024 -0600
   
-      Produce CST nodes for the different kinds of JSON string fragments
+      use extra to allow comments anywhere
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: f9a16b973c2e524cc7cb6c841ba45a350de582d7
+Latest commit in repo: 10b4bd7b0994f039cb7d9ff7e82202acecb39e8a
 Last change in file:
-  commit f3fc1aba412d9c6f8563aef4fd8bd1d28739c169
+  commit 10b4bd7b0994f039cb7d9ff7e82202acecb39e8a
   Author: Martin Jambon <martin@r2c.dev>
-  Date:   Thu Jul 6 11:43:26 2023 -0700
+  Date:   Mon May 6 18:17:25 2024 -0700
   
-      Add missing choice for single-quoted strings in extended grammar
-      (was due to copy-pasting-editing the original grammar)
+      Update overridden rule 'label_pair' so as to pass 'Quoted key' test
 ---
