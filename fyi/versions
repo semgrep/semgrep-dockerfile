@@ -1,6 +1,6 @@
 File: semgrep-grammars/src/tree-sitter-dockerfile/LICENSE
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: 2a43a1c18400410b3ece3e6c98c14f5addf03800
+Latest commit in repo: c0a9d694d9bf8ab79a919f5f9c7bc9c169caf321
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
   Author: Camden Cheek <camden@ccheek.com>
@@ -10,7 +10,7 @@ Last change in file:
 ---
 File: semgrep-grammars/src/tree-sitter-dockerfile/grammar.js
 Git repo name: tree-sitter-dockerfile
-Latest commit in repo: 2a43a1c18400410b3ece3e6c98c14f5addf03800
+Latest commit in repo: c0a9d694d9bf8ab79a919f5f9c7bc9c169caf321
 Last change in file:
   commit bd355ef2d116f71e9561f3e2585241bf74b0fd55
   Author: Martin Jambon <martin@mjambon.com>
@@ -20,7 +20,7 @@ Last change in file:
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 70933949d998337f15a2663e417864c87c8714ef
+Latest commit in repo: f9a16b973c2e524cc7cb6c841ba45a350de582d7
 Last change in file:
   commit f3fc1aba412d9c6f8563aef4fd8bd1d28739c169
   Author: Martin Jambon <martin@r2c.dev>
