@@ -774,11 +774,25 @@ let map_healthcheck_instruction (env : env) ((v1, v2) : CST.healthcheck_instruct
     | `Semg_meta tok -> R.Case ("Semg_meta",
         (* pattern \$[A-Z_][A-Z_0-9]* *) token env tok
       )
+    | `Semg_ellips tok -> R.Case ("Semg_ellips",
+        (* "..." *) token env tok
+      )
     | `NONE tok -> R.Case ("NONE",
         (* "NONE" *) token env tok
       )
-    | `Rep_param_cmd_inst (v1, v2) -> R.Case ("Rep_param_cmd_inst",
-        let v1 = R.List (List.map (map_param env) v1) in
+    | `Rep_choice_semg_ellips_cmd_inst (v1, v2) -> R.Case ("Rep_choice_semg_ellips_cmd_inst",
+        let v1 =
+          R.List (List.map (fun x ->
+            (match x with
+            | `Semg_ellips tok -> R.Case ("Semg_ellips",
+                (* "..." *) token env tok
+              )
+            | `Param x -> R.Case ("Param",
+                map_param env x
+              )
+            )
+          ) v1)
+        in
         let v2 = map_cmd_instruction env v2 in
         R.Tuple [v1; v2]
       )

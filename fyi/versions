@@ -3,6 +3,9 @@ Git repo name: tree-sitter-dockerfile
 Latest commit in repo: 439c3e7b8a9bfdbf1f7d7c2beaae4173dc484cbf
 Last change in file:
   commit b25f86c3b2ec4192d040432a1a279861df390762
+  gpg: Signature made Tue 11 May 2021 07:01:34 PM PDT
+  gpg:                using RSA key AA3B82D30534D13365809E56595BFFE3A04E48B9
+  gpg: Can't check signature: No public key
   Author: Camden Cheek <camden@ccheek.com>
   Date:   Tue May 11 20:01:30 2021 -0600
   
@@ -13,6 +16,9 @@ Git repo name: tree-sitter-dockerfile
 Latest commit in repo: 439c3e7b8a9bfdbf1f7d7c2beaae4173dc484cbf
 Last change in file:
   commit 439c3e7b8a9bfdbf1f7d7c2beaae4173dc484cbf
+  gpg: Signature made Fri 19 Apr 2024 02:28:09 PM PDT
+  gpg:                using RSA key AA3B82D30534D13365809E56595BFFE3A04E48B9
+  gpg: Can't check signature: No public key
   Author: Camden Cheek <camden@ccheek.com>
   Date:   Fri Apr 19 15:28:09 2024 -0600
   
@@ -20,11 +26,24 @@ Last change in file:
 ---
 File: semgrep-grammars/src/semgrep-dockerfile/grammar.js
 Git repo name: ocaml-tree-sitter-semgrep
-Latest commit in repo: 10b4bd7b0994f039cb7d9ff7e82202acecb39e8a
+Latest commit in repo: fbbf4a398d3331beb12be0ca111f73ae7736e276
 Last change in file:
-  commit 10b4bd7b0994f039cb7d9ff7e82202acecb39e8a
-  Author: Martin Jambon <martin@r2c.dev>
-  Date:   Mon May 6 18:17:25 2024 -0700
+  commit a13431ef4496acf7f7fa9d10e0bed4cc9899cff0
+  gpg: Signature made Wed 31 Jul 2024 03:55:53 PM PDT
+  gpg:                using RSA key C1930C5F9C9E0472DCF9ECC97D71116F505E5145
+  gpg: Good signature from "Nathaniel Mote <nat@semgrep.com>" [ultimate]
+  gpg:                 aka "Nathaniel Mote <nat@r2c.dev>" [ultimate]
+  gpg:                 aka "Nathaniel Mote <nat@natmote.net>" [ultimate]
+  Author: Nat Mote <nat@semgrep.com>
+  Date:   Wed Jul 31 15:55:53 2024 -0700
   
-      Update overridden rule 'label_pair' so as to pass 'Quoted key' test
+      fix(dockerfile): Allow Semgrep ellipsis in healthcheck instruction
+      
+      This had previously been omitted, so the test cases that I've added here
+      failed to parse. When parsing dockerfile patterns, we fall back to
+      parsing them as Bash if they fail to parse as Dockerfile. These examples
+      parsed successfully as Bash, but the trees generated did not match, so
+      these silently failed to match where they should.
+      
+      Test plan: Automated tests.
 ---

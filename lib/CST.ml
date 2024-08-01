@@ -406,9 +406,11 @@ type healthcheck_instruction = (
     pat_heal
   * [
         `Semg_meta of semgrep_metavariable (*tok*)
+      | `Semg_ellips of Token.t (* "..." *)
       | `NONE of Token.t (* "NONE" *)
-      | `Rep_param_cmd_inst of (
-            param list (* zero or more *)
+      | `Rep_choice_semg_ellips_cmd_inst of (
+            [ `Semg_ellips of Token.t (* "..." *) | `Param of param ]
+              list (* zero or more *)
           * cmd_instruction
         )
     ]

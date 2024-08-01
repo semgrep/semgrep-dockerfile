@@ -660,10 +660,14 @@ let children_regexps : (string * Run.exp option) list = [
       Token (Name "pat_heal");
       Alt [|
         Token (Name "semgrep_metavariable");
+        Token (Name "semgrep_ellipsis");
         Token (Literal "NONE");
         Seq [
           Repeat (
-            Token (Name "param");
+            Alt [|
+              Token (Name "semgrep_ellipsis");
+              Token (Name "param");
+            |];
           );
           Token (Name "cmd_instruction");
         ];
@@ -2381,16 +2385,32 @@ let trans_healthcheck_instruction ((kind, body) : mt) : CST.healthcheck_instruct
                   trans_semgrep_metavariable (Run.matcher_token v)
                 )
             | Alt (1, v) ->
+                `Semg_ellips (
+                  trans_semgrep_ellipsis (Run.matcher_token v)
+                )
+            | Alt (2, v) ->
                 `NONE (
                   Run.trans_token (Run.matcher_token v)
                 )
-            | Alt (2, v) ->
-                `Rep_param_cmd_inst (
+            | Alt (3, v) ->
+                `Rep_choice_semg_ellips_cmd_inst (
                   (match v with
                   | Seq [v0; v1] ->
                       (
                         Run.repeat
-                          (fun v -> trans_param (Run.matcher_token v))
+                          (fun v ->
+                            (match v with
+                            | Alt (0, v) ->
+                                `Semg_ellips (
+                                  trans_semgrep_ellipsis (Run.matcher_token v)
+                                )
+                            | Alt (1, v) ->
+                                `Param (
+                                  trans_param (Run.matcher_token v)
+                                )
+                            | _ -> assert false
+                            )
+                          )
                           v0
                         ,
                         trans_cmd_instruction (Run.matcher_token v1)
