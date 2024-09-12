@@ -555,3 +555,10 @@ type json_string (* inlined *) = (
       list (* zero or more *)
   * Token.t (* "\"" *)
 )
+
+type extra = 
+    Line_continuation of Loc.t * line_continuation
+  | Comment of Loc.t * comment
+
+
+type extras = extra list

@@ -39,6 +39,7 @@ let children_regexps : (string * Run.exp option) list = [
   "pat_user", None;
   "imm_tok_pat_9f6bbb9", None;
   "imm_tok_pat_f43f746", None;
+  "comment", None;
   "pat_stop", None;
   "pat_shell", None;
   "pat_work", None;
@@ -85,6 +86,7 @@ let children_regexps : (string * Run.exp option) list = [
   "pat_05444c2", None;
   "heredoc_line", None;
   "imm_tok_pat_f46f69d", None;
+  "line_continuation", None;
   "imm_tok_pat_8713919", None;
   "pat_2b6adbc", None;
   "imm_tok_pat_441cd81", None;
@@ -795,6 +797,10 @@ let trans_imm_tok_pat_f43f746 ((kind, body) : mt) : CST.imm_tok_pat_f43f746 =
   | Leaf v -> v
   | Children _ -> assert false
 
+let trans_comment ((kind, body) : mt) : CST.comment =
+  match body with
+  | Leaf v -> v
+  | Children _ -> assert false
 
 let trans_pat_stop ((kind, body) : mt) : CST.pat_stop =
   match body with
@@ -1027,6 +1033,10 @@ let trans_imm_tok_pat_f46f69d ((kind, body) : mt) : CST.imm_tok_pat_f46f69d =
   | Leaf v -> v
   | Children _ -> assert false
 
+let trans_line_continuation ((kind, body) : mt) : CST.line_continuation =
+  match body with
+  | Leaf v -> v
+  | Children _ -> assert false
 
 let trans_imm_tok_pat_8713919 ((kind, body) : mt) : CST.imm_tok_pat_8713919 =
   match body with
@@ -2647,14 +2657,53 @@ let trans_source_file ((kind, body) : mt) : CST.source_file =
         v
   | Leaf _ -> assert false
 
+(*
+   Costly operation that translates a whole tree or subtree.
+
+   The first pass translates it into a generic tree structure suitable
+   to guess which node corresponds to each grammar rule.
+   The second pass is a translation into a typed tree where each grammar
+   node has its own type.
+
+   This function is called:
+   - once on the root of the program after removing extras
+     (comments and other nodes that occur anywhere independently from
+     the grammar);
+   - once of each extra node, resulting in its own independent tree of type
+     'extra'.
+*)
+let translate_tree src node trans_x =
+  let matched_tree = Run.match_tree children_regexps src node in
+  Option.map trans_x matched_tree
+
+
+let translate_extra src (node : Tree_sitter_output_t.node) : CST.extra option =
+  match node.type_ with
+  | "line_continuation" ->
+      (match translate_tree src node trans_line_continuation with
+      | None -> None
+      | Some x -> Some (Line_continuation (Run.get_loc node, x)))
+  | "comment" ->
+      (match translate_tree src node trans_comment with
+      | None -> None
+      | Some x -> Some (Comment (Run.get_loc node, x)))
+  | _ -> None
+
+let translate_root src root_node =
+  translate_tree src root_node trans_source_file
+
 let parse_input_tree input_tree =
   let orig_root_node = Tree_sitter_parsing.root input_tree in
   let src = Tree_sitter_parsing.src input_tree in
   let errors = Run.extract_errors src orig_root_node in
-  let root_node = Run.remove_extras ~extras orig_root_node in
-  let matched_tree = Run.match_tree children_regexps src root_node in
-  let opt_program = Option.map trans_source_file matched_tree in
-  Parsing_result.create src opt_program errors
+  let opt_program, extras =
+     Run.translate
+       ~extras
+       ~translate_root:(translate_root src)
+       ~translate_extra:(translate_extra src)
+       orig_root_node
+  in
+  Parsing_result.create src opt_program extras errors
 
 let string ?src_file contents =
   let input_tree = parse_source_string ?src_file contents in

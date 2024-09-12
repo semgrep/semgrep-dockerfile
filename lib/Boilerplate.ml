@@ -1068,7 +1068,30 @@ let map_source_file (env : env) (xs : CST.source_file) =
     R.Tuple [v1; v2]
   ) xs)
 
+let map_line_continuation (env : env) (tok : CST.line_continuation) =
+  (* pattern \\[ \t]*\n *) token env tok
+
+let map_comment (env : env) (tok : CST.comment) =
+  (* pattern #.* *) token env tok
+
 let dump_tree root =
   map_source_file () root
-  |> Tree_sitter_run.Raw_tree.to_string
-  |> print_string
+  |> Tree_sitter_run.Raw_tree.to_channel stdout
+
+let map_extra (env : env) (x : CST.extra) =
+  match x with
+  | Line_continuation (_loc, x) -> ("line_continuation", "line_continuation", map_line_continuation env x)
+  | Comment (_loc, x) -> ("comment", "comment", map_comment env x)
+
+let dump_extras (extras : CST.extras) =
+  List.iter (fun extra ->
+    let ts_rule_name, ocaml_type_name, raw_tree = map_extra () extra in
+    let details =
+      if ocaml_type_name <> ts_rule_name then
+        Printf.sprintf " (OCaml type '%s')" ocaml_type_name
+      else
+        ""
+    in
+    Printf.printf "%s%s:\n" ts_rule_name details;
+    Tree_sitter_run.Raw_tree.to_channel stdout raw_tree
+  ) extras
