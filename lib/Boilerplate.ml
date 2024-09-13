@@ -1080,8 +1080,8 @@ let dump_tree root =
 
 let map_extra (env : env) (x : CST.extra) =
   match x with
-  | Line_continuation (_loc, x) -> ("line_continuation", "line_continuation", map_line_continuation env x)
-  | Comment (_loc, x) -> ("comment", "comment", map_comment env x)
+  | `Line_continuation (_loc, x) -> ("line_continuation", "line_continuation", map_line_continuation env x)
+  | `Comment (_loc, x) -> ("comment", "comment", map_comment env x)
 
 let dump_extras (extras : CST.extras) =
   List.iter (fun extra ->

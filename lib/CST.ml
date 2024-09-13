@@ -556,9 +556,9 @@ type json_string (* inlined *) = (
   * Token.t (* "\"" *)
 )
 
-type extra = 
-    Line_continuation of Loc.t * line_continuation
-  | Comment of Loc.t * comment
-
+type extra = [
+    `Line_continuation of Loc.t * line_continuation
+  | `Comment of Loc.t * comment
+]
 
 type extras = extra list

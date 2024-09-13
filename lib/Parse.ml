@@ -2682,11 +2682,11 @@ let translate_extra src (node : Tree_sitter_output_t.node) : CST.extra option =
   | "line_continuation" ->
       (match translate_tree src node trans_line_continuation with
       | None -> None
-      | Some x -> Some (Line_continuation (Run.get_loc node, x)))
+      | Some x -> Some (`Line_continuation (Run.get_loc node, x)))
   | "comment" ->
       (match translate_tree src node trans_comment with
       | None -> None
-      | Some x -> Some (Comment (Run.get_loc node, x)))
+      | Some x -> Some (`Comment (Run.get_loc node, x)))
   | _ -> None
 
 let translate_root src root_node =
